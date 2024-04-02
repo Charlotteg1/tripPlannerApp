@@ -72,6 +72,7 @@ public class User {
     }
 
     public List<Trip> getTrips() {
+
         return trips;
     }
 
