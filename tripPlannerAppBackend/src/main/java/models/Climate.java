@@ -1,4 +1,4 @@
-package tripPlanner.com.models;
+package models;
 
 public enum Climate {
 

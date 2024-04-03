@@ -1,9 +1,8 @@
-package tripPlanner.com.repostitories;
+package repostitories;
 
-import org.hibernate.sql.ast.tree.expression.JdbcParameter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import tripPlanner.com.models.Activity;
+import models.Activity;
 
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity,Long> {
