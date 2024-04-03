@@ -1,17 +1,14 @@
 package tripPlanner.com.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Entity
 public class Transportation {
 
-//    -
-//            - id
-//    - trip id
-//    - date
-//    - time of  departure
-//    - time of arrival
-//    - mode of travel
 
     private Long id;
 

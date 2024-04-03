@@ -1,5 +1,6 @@
 package tripPlanner.com.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -26,6 +27,8 @@ public class User {
     @Column
     private String password; //Authorisation and encrypt later..
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties({"users"})
     private List<Trip> trips;
 
     //Constructor

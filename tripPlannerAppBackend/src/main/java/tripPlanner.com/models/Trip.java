@@ -1,24 +1,46 @@
 package tripPlanner.com.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
+@Table(name = "trips")
 public class Trip {
 
     //Properties
-    private Long tripId;
+    @Column
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Column(name = "user_id")
+    @ManyToOne
+    @JsonIgnoreProperties({"users"})
     private Long userId;
 
+    @Column(name = "trip_start_date")
     private LocalDate tripStartDate;
 
+    @Column(name = "trip_end_date")
     private LocalDate tripEndDate;
 
+    @Column
     private Climate climate;
 
+    @Column(name = "packing_list")
+    @OneToOne(mappedBy = "trip")
     private PackingList packingList;
 
+    @OneToMany(mappedBy = "trip")
+    @JsonIgnoreProperties({"trips"})
     private List<Transportation> transportationList;
+
+    @OneToMany(mappedBy = "trip")
+    @JsonIgnoreProperties({"trips"})
+    private List<Day> days;
 
     //Constructor
     public Trip(Long userId, LocalDate tripStartDate, LocalDate tripEndDate, Climate climate, List<Transportation> transportationList ) {
@@ -37,12 +59,12 @@ public class Trip {
 
     //Getters and Setters
 
-    public Long getTripId() {
-        return tripId;
+    public Long getId() {
+        return id;
     }
 
-    public void setTripId(Long tripId) {
-        this.tripId = tripId;
+    public void setId(Long Id) {
+        this.id = id;
     }
 
     public Long getUserId() {

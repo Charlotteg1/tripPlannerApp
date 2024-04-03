@@ -1,12 +1,22 @@
 package tripPlanner.com.models;
 
+import jakarta.persistence.*;
+
 import java.util.List;
 
+@Entity
+@Table(name = "packing_list")
 public class PackingList {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "trip_id")
+    @OneToOne
     private Long tripId;
 
+    @Column(name = "packing_lists")
     private List<IndividualPackingList> packingLists;
 
     public PackingList(Long tripId, List<IndividualPackingList> packingLists) {
