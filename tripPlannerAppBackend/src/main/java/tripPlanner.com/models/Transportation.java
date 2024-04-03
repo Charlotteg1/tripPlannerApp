@@ -13,17 +13,19 @@ public class Transportation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "trip_id")
     @ManyToOne
     @JsonIgnoreProperties({"trips"})
     private Long tripId; // may be more wise to change to dayId, relating to day by day
 
-    @Column
+    @Column(name = "departure_time_and_date")
     private LocalDateTime departureTimeAndDate;
 
-    @Column
+    @Column(name = "arrival_time_and_date")
     private LocalDateTime arrivalTimeAndDate;
 
-    @Column
+    @Column(name = "mode_of_travel")
+    @Enumerated
     private ModeOfTravel mode;
 
     public Transportation(Long tripId, LocalDateTime departureTimeAndDate, LocalDateTime arrivalTimeAndDate, ModeOfTravel mode) {
