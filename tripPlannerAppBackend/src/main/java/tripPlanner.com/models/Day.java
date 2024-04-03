@@ -1,22 +1,37 @@
 package tripPlanner.com.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
+@Table(name = "days")
 public class Day {
 
     // Properties
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "trip_id")
+    @ManyToOne
+    @JsonIgnoreProperties({"trips"})
     private Long tripId;
 
+    @Column
     private LocalDate date;
 
-    private List<Activities> activities;
+    @OneToMany(mappedBy = "day")
+    @JsonIgnoreProperties({"days"})
+    private List<Activity> activities;
 
-    private List<Restaurants> restaurants;
+    @OneToMany(mappedBy = "day")
+    @JsonIgnoreProperties({"days"})
+    private List<Restaurant> restaurants;
 
-    public Day(Long tripId, LocalDate date, List<Activities> activities, List<Restaurants> restaurants) {
+    public Day(Long tripId, LocalDate date, List<Activity> activities, List<Restaurant> restaurants) {
         this.tripId = tripId;
         this.date = date;
         this.activities = activities;
@@ -47,19 +62,19 @@ public class Day {
         this.date = date;
     }
 
-    public List<Activities> getActivities() {
+    public List<Activity> getActivity() {
         return activities;
     }
 
-    public void setActivities(List<Activities> activities) {
+    public void setActivity(List<Activity> activities) {
         this.activities = activities;
     }
 
-    public List<Restaurants> getRestaurants() {
+    public List<Restaurant> getRestaurants() {
         return restaurants;
     }
 
-    public void setRestaurants(List<Restaurants> restaurants) {
+    public void setRestaurants(List<Restaurant> restaurants) {
         this.restaurants = restaurants;
     }
 }

@@ -12,7 +12,7 @@ public class IndividualPackingList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "list_name")
     private String listName;
 
     @Column

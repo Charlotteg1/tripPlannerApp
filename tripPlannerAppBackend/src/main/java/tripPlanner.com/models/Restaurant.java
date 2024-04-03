@@ -1,34 +1,40 @@
 package tripPlanner.com.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "restaurants")
-public class Restaurants {
+public class Restaurant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "day_id")
+    @ManyToOne
+    @JsonIgnoreProperties({"days"})
+    private Long dayId;
     @Column
-    private String Name;
+    private String name;
 
     @Enumerated
     private List<Meal> meal;
 
-    @Column
+    @Column(name = "items_consumed")
     private List<ItemConsumed> itemsConsumed;
 
-    @Column
+    @Column(name = " establishment_rating")
     private Float establishmentRating;
 
-    @Column
+    @Column(name = "would_visit_again")
     private Boolean wouldVisitAgain; // may change to recommend
 
-    public Restaurants(String name, List<Meal> meal, List<ItemConsumed> itemsConsumed, Float establishmentRating, Boolean wouldVisitAgain) {
-        Name = name;
+    public Restaurant(Long dayId, String name, List<Meal> meal, List<ItemConsumed> itemsConsumed, Float establishmentRating, Boolean wouldVisitAgain) {
+        this.dayId = dayId;
+        this.name = name;
         this.meal = meal;
         this.itemsConsumed = itemsConsumed;
         this.establishmentRating = establishmentRating;
@@ -44,11 +50,11 @@ public class Restaurants {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public List<Meal> getMeal() {
