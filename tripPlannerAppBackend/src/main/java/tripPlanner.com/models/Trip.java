@@ -1,9 +1,9 @@
 package tripPlanner.com.models;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Trip {
-
 
     //Properties
     private Long tripId;
@@ -16,12 +16,18 @@ public class Trip {
 
     private Climate climate;
 
+    private PackingList packingList;
+
+    private List<Transportation> transportationList;
+
     //Constructor
-    public Trip(Long userId, LocalDate tripStartDate, LocalDate tripEndDate, Climate climate) {
+    public Trip(Long userId, LocalDate tripStartDate, LocalDate tripEndDate, Climate climate, List<Transportation> transportationList ) {
         this.userId = userId;
         this.tripStartDate = tripStartDate;
         this.tripEndDate = tripEndDate;
         this.climate = climate;
+        this.packingList=null;
+        this.transportationList= transportationList;
     }
 
 
@@ -69,5 +75,21 @@ public class Trip {
 
     public void setClimate(Climate climate) {
         this.climate = climate;
+    }
+
+    public PackingList getPackingList() {
+        return packingList;
+    }
+
+    public void setPackingList(PackingList packingList) {
+        this.packingList = packingList;
+    }
+
+    public List<Transportation> getTransportationList() {
+        return transportationList;
+    }
+
+    public void setTransportationList(List<Transportation> transportationList) {
+        this.transportationList = transportationList;
     }
 }
