@@ -7,7 +7,7 @@ public class Day {
 
     // Properties
     private Long id;
-    
+
     private Long tripId;
 
     private LocalDate date;

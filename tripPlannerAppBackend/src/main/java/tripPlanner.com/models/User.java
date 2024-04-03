@@ -1,18 +1,29 @@
 package tripPlanner.com.models;
 
+import jakarta.persistence.*;
+
 import java.util.List;
 
+@Entity
+@Table(name = "users")
 public class User {
 
     //Properties
+    @Column
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String forename;
 
+    @Column
     private String surname;
 
+    @Column
     private String email;
 
+    @Column
     private String password; //Authorisation and encrypt later..
 
     private List<Trip> trips;
