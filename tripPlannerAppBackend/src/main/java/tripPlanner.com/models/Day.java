@@ -7,6 +7,7 @@ public class Day {
 
     // Properties
     private Long id;
+    
     private Long tripId;
 
     private LocalDate date;
@@ -14,8 +15,51 @@ public class Day {
     private List<Activities> activities;
 
     private List<Restaurants> restaurants;
-//    - arrival(true or false indicating travelling there and first day)
-//- Departure (true or false)
-//- activities
-//- Restaurants  plans
+
+    public Day(Long tripId, LocalDate date, List<Activities> activities, List<Restaurants> restaurants) {
+        this.tripId = tripId;
+        this.date = date;
+        this.activities = activities;
+        this.restaurants = restaurants;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(Long tripId) {
+        this.tripId = tripId;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public List<Activities> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(List<Activities> activities) {
+        this.activities = activities;
+    }
+
+    public List<Restaurants> getRestaurants() {
+        return restaurants;
+    }
+
+    public void setRestaurants(List<Restaurants> restaurants) {
+        this.restaurants = restaurants;
+    }
 }
