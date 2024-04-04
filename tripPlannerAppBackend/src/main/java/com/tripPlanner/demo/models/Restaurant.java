@@ -1,4 +1,4 @@
-package models;
+package com.tripPlanner.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -13,32 +13,35 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "day_id")
     @ManyToOne
+    @JoinColumn(name = "day_id")
     @JsonIgnoreProperties({"days"})
-    private Long dayId;
+    private Day day;
     @Column
     private String name;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private List<Meal> meal;
 
-    @Column(name = "items_consumed")
+    @OneToMany(mappedBy = "restaurant")
     private List<ItemConsumed> itemsConsumed;
 
-    @Column(name = " establishment_rating")
+    @Column(name = "establishment_rating")
     private Float establishmentRating;
 
     @Column(name = "would_visit_again")
     private Boolean wouldVisitAgain; // may change to recommend
 
-    public Restaurant(Long dayId, String name, List<Meal> meal, List<ItemConsumed> itemsConsumed, Float establishmentRating, Boolean wouldVisitAgain) {
-        this.dayId = dayId;
+    public Restaurant(Day day, String name, List<Meal> meal, List<ItemConsumed> itemsConsumed, Float establishmentRating, Boolean wouldVisitAgain) {
+        this.day = day;
         this.name = name;
         this.meal = meal;
         this.itemsConsumed = itemsConsumed;
         this.establishmentRating = establishmentRating;
         this.wouldVisitAgain = wouldVisitAgain;
+    }
+
+    public Restaurant() {
     }
 
     public Long getId() {
@@ -47,6 +50,14 @@ public class Restaurant {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Day getDay() {
+        return day;
+    }
+
+    public void setDay(Day day) {
+        this.day = day;
     }
 
     public String getName() {

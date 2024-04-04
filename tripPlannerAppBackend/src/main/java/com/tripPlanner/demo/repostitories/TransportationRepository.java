@@ -1,9 +1,8 @@
-package repostitories;
+package com.tripPlanner.demo.repostitories;
 
+import com.tripPlanner.demo.models.Transportation;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import models.Transportation;
 
-@Repository
+//@Repository
 public interface TransportationRepository extends JpaRepository<Transportation, Long> {
 }

@@ -1,4 +1,4 @@
-package models;
+package com.tripPlanner.demo.models;
 
 import jakarta.persistence.*;
 
@@ -25,15 +25,18 @@ public class Activity {
     private String notes;
 
     @ManyToOne
-    @Column(name ="day_id")
-    private Long dayId;
+    @JoinColumn(name ="day_id")
+    private Day day;
 
-    public Activity(LocalTime estimatedStartTime, int estimatedDuration, String activityTitle, String notes, Long dayId) {
+    public Activity(LocalTime estimatedStartTime, int estimatedDuration, String activityTitle, String notes, Day day) {
         this.estimatedStartTime = estimatedStartTime;
         this.estimatedDuration = estimatedDuration;
         this.activityTitle = activityTitle;
         this.notes = notes;
-        this.dayId = dayId;
+        this.day = day;
+    }
+
+    public Activity() {
     }
 
     public Long getId() {
@@ -76,11 +79,11 @@ public class Activity {
         this.notes = notes;
     }
 
-    public Long getDayId() {
-        return dayId;
+    public Day getDay() {
+        return day;
     }
 
-    public void setDayId(Long dayId) {
-        this.dayId = dayId;
+    public void setDay(Day day) {
+        this.day = day;
     }
 }

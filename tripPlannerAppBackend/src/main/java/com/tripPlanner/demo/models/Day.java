@@ -1,4 +1,4 @@
-package models;
+package com.tripPlanner.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -15,27 +15,28 @@ public class Day {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "trip_id")
     @ManyToOne
-    @JsonIgnoreProperties({"trips"})
-    private Long tripId;
+    @JoinColumn(name = "trip_id")
+    private Trip trip;
 
     @Column
     private LocalDate date;
 
     @OneToMany(mappedBy = "day")
-    @JsonIgnoreProperties({"days"})
     private List<Activity> activities;
 
+    // may later change to many to many as can go to the same restaurant/food place numerous times in a trip
     @OneToMany(mappedBy = "day")
-    @JsonIgnoreProperties({"days"})
     private List<Restaurant> restaurants;
 
-    public Day(Long tripId, LocalDate date, List<Activity> activities, List<Restaurant> restaurants) {
-        this.tripId = tripId;
+    public Day(Trip trip, LocalDate date, List<Activity> activities, List<Restaurant> restaurants) {
+        this.trip = trip;
         this.date = date;
         this.activities = activities;
         this.restaurants = restaurants;
+    }
+
+    public Day() {
     }
 
     public Long getId() {
@@ -46,12 +47,12 @@ public class Day {
         this.id = id;
     }
 
-    public Long getTripId() {
-        return tripId;
+    public Trip getTrip() {
+        return trip;
     }
 
-    public void setTripId(Long tripId) {
-        this.tripId = tripId;
+    public void setTrip(Trip trip) {
+        this.trip = trip;
     }
 
     public LocalDate getDate() {

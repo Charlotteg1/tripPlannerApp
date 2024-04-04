@@ -1,4 +1,4 @@
-package models;
+package com.tripPlanner.demo.models;
 
 import jakarta.persistence.*;
 
@@ -10,15 +10,23 @@ public class PackingListItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "individual_packing_list_id")
+    private IndividualPackingList individualPackingList;
+
     @Column
     private boolean packed;
 
     @Column(name = "item_name")
     private String itemName;
 
-    public PackingListItem(boolean packed, String itemName) {
+    public PackingListItem(IndividualPackingList individualPackingList, boolean packed, String itemName) {
+        this.individualPackingList = individualPackingList;
         this.packed = packed;
         this.itemName = itemName;
+    }
+
+    public PackingListItem() {
     }
 
     public Long getId() {
@@ -27,6 +35,14 @@ public class PackingListItem {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public IndividualPackingList getIndividualPackingList() {
+        return individualPackingList;
+    }
+
+    public void setIndividualPackingList(IndividualPackingList individualPackingList) {
+        this.individualPackingList = individualPackingList;
     }
 
     public boolean isPacked() {

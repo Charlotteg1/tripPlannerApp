@@ -1,4 +1,4 @@
-package models;
+package com.tripPlanner.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -6,16 +6,16 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "transportation")
 public class Transportation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "trip_id")
     @ManyToOne
-    @JsonIgnoreProperties({"trips"})
-    private Long tripId; // may be more wise to change to dayId, relating to day by day
+    @JoinColumn(name = "trip_id")
+    private Trip trip; // may be more wise to change to day, relating to day by day
 
     @Column(name = "departure_time_and_date")
     private LocalDateTime departureTimeAndDate;
@@ -24,14 +24,17 @@ public class Transportation {
     private LocalDateTime arrivalTimeAndDate;
 
     @Column(name = "mode_of_travel")
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private ModeOfTravel mode;
 
-    public Transportation(Long tripId, LocalDateTime departureTimeAndDate, LocalDateTime arrivalTimeAndDate, ModeOfTravel mode) {
-        this.tripId = tripId;
+    public Transportation(Trip trip, LocalDateTime departureTimeAndDate, LocalDateTime arrivalTimeAndDate, ModeOfTravel mode) {
+        this.trip = trip;
         this.departureTimeAndDate = departureTimeAndDate;
         this.arrivalTimeAndDate = arrivalTimeAndDate;
         this.mode = mode;
+    }
+
+    public Transportation() {
     }
 
     public Long getId() {
@@ -42,12 +45,12 @@ public class Transportation {
         this.id = id;
     }
 
-    public Long getTripId() {
-        return tripId;
+    public Trip getTrip() {
+        return trip;
     }
 
-    public void setTripId(Long tripId) {
-        this.tripId = tripId;
+    public void setTrip(Trip trip) {
+        this.trip = trip;
     }
 
     public LocalDateTime getDepartureTimeAndDate() {

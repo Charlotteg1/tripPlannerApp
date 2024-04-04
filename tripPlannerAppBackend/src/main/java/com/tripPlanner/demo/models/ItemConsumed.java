@@ -1,4 +1,4 @@
-package models;
+package com.tripPlanner.demo.models;
 
 import jakarta.persistence.*;
 
@@ -9,6 +9,10 @@ public class ItemConsumed {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
 
     @Column
     private String name;
@@ -21,10 +25,14 @@ public class ItemConsumed {
 
     // in future enable a picture to be stored of dish eaten (eg)
 
-    public ItemConsumed(String name, Float rating, String notes) {
+    public ItemConsumed(Restaurant restaurant, String name, Float rating, String notes) {
+        this.restaurant = restaurant;
         this.name = name;
         this.rating = rating;
         this.notes = notes;
+    }
+
+    public ItemConsumed() {
     }
 
     public Long getId() {
@@ -33,6 +41,14 @@ public class ItemConsumed {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     public String getName() {

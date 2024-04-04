@@ -1,9 +1,8 @@
-package repostitories;
+package com.tripPlanner.demo.repostitories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import models.User;
+import com.tripPlanner.demo.models.User;
 
-@Repository
+//@Repository
 public interface UserRepository extends JpaRepository<User,Long> {
 }
