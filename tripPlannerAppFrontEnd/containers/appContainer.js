@@ -1,13 +1,20 @@
+import { NavigationContainer } from "@react-navigation/native";
 import Login from "../components/Login";
-import { View } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+const Stack = createNativeStackNavigator();
+
 
 const AppContainer = () => {
-    
 
+    
     return(
-        <View>
-        <Login/>
-        </View>
+        <NavigationContainer>
+            <Stack.Navigator>
+                    <Stack.Screen name="login" component={Login} options={{
+                        headerShown: false
+                    }}/>
+            </Stack.Navigator>
+        </NavigationContainer>
     )
 }
 export default AppContainer;
