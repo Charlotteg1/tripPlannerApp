@@ -19,6 +19,9 @@ public class Trip {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column
+    private String destination;
+
     @Column(name = "trip_start_date")
     private LocalDate tripStartDate;
 
@@ -27,6 +30,8 @@ public class Trip {
 
     @Enumerated(EnumType.STRING)
     private Climate climate;
+
+//  could later add business or leisure option, ie private boolean businessTrip
 
     @OneToOne(mappedBy = "trip")
     private PackingList packingList;
@@ -40,8 +45,9 @@ public class Trip {
     private List<Day> days;
 
     //Constructor
-    public Trip(User user, LocalDate tripStartDate, LocalDate tripEndDate, Climate climate, List<Transportation> transportationList ) {
+    public Trip(User user,String destination, LocalDate tripStartDate, LocalDate tripEndDate, Climate climate, List<Transportation> transportationList ) {
         this.user = user;
+        this.destination = destination;
         this.tripStartDate = tripStartDate;
         this.tripEndDate = tripEndDate;
         this.climate = climate;
@@ -70,6 +76,14 @@ public class Trip {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
     public LocalDate getTripStartDate() {
@@ -110,5 +124,13 @@ public class Trip {
 
     public void setTransportationList(List<Transportation> transportationList) {
         this.transportationList = transportationList;
+    }
+
+    public List<Day> getDays() {
+        return days;
+    }
+
+    public void setDays(List<Day> days) {
+        this.days = days;
     }
 }

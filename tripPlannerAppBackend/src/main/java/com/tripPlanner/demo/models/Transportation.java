@@ -17,6 +17,12 @@ public class Transportation {
     @JoinColumn(name = "trip_id")
     private Trip trip; // may be more wise to change to day, relating to day by day
 
+    @Column
+    private String departureDestination;
+
+    @Column
+    private String arrivalDestination;
+
     @Column(name = "departure_time_and_date")
     private LocalDateTime departureTimeAndDate;
 
@@ -27,8 +33,10 @@ public class Transportation {
     @Enumerated(EnumType.STRING)
     private ModeOfTravel mode;
 
-    public Transportation(Trip trip, LocalDateTime departureTimeAndDate, LocalDateTime arrivalTimeAndDate, ModeOfTravel mode) {
+    public Transportation(Trip trip, String departureDestination, String arrivalDestination, LocalDateTime departureTimeAndDate, LocalDateTime arrivalTimeAndDate, ModeOfTravel mode) {
         this.trip = trip;
+        this.departureDestination = departureDestination;
+        this.arrivalDestination = arrivalDestination;
         this.departureTimeAndDate = departureTimeAndDate;
         this.arrivalTimeAndDate = arrivalTimeAndDate;
         this.mode = mode;
@@ -51,6 +59,22 @@ public class Transportation {
 
     public void setTrip(Trip trip) {
         this.trip = trip;
+    }
+
+    public String getDepartureDestination() {
+        return departureDestination;
+    }
+
+    public void setDepartureDestination(String departureDestination) {
+        this.departureDestination = departureDestination;
+    }
+
+    public String getArrivalDestination() {
+        return arrivalDestination;
+    }
+
+    public void setArrivalDestination(String arrivalDestination) {
+        this.arrivalDestination = arrivalDestination;
     }
 
     public LocalDateTime getDepartureTimeAndDate() {
