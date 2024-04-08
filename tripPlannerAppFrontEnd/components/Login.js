@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Button,TextInput, SafeAreaView, Text } from "react-native";
 
-const Login = () => {
+const Login = ({navigation}) => {
+
 
     const [email,setEmail] = useState();
     const [password,setPassword] = useState();
@@ -11,10 +12,14 @@ const Login = () => {
     // display error if incorrect/user not found
     // if correct send/view to page
     const checkLogin = () => {
+        if(!password && !email){
+            setError("please enter all fields")
+            return;
+        }
         // check email includes @
         if(email.includes('@')){
-            if(password.length > 7){
-                navigation.navigate('Trips');
+            if(password && password.length > 7){
+                navigation.navigate('trips');
             }else{
                 setError("Password should be at least 8 characters long")
                 setEmail()
@@ -23,7 +28,7 @@ const Login = () => {
         }else{
             setError("Please submit a valid email format")
             setEmail()
-            setPassword()
+            setPassword();
         }
     }
     return(

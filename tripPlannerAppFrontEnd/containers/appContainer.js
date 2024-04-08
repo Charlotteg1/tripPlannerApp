@@ -1,6 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 import Login from "../components/Login";
+import TripList from "../components/TripList";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AddTrip from "../components/AddTrip";
 const Stack = createNativeStackNavigator();
 
 
@@ -11,6 +13,12 @@ const AppContainer = () => {
         <NavigationContainer>
             <Stack.Navigator>
                     <Stack.Screen name="login" component={Login} options={{
+                        headerShown: false
+                    } } />
+                     <Stack.Screen name="trips" component={TripList} options={{
+                        headerShown: false
+                    }}/>
+                     <Stack.Screen name="addTrips" component={AddTrip} options={{
                         headerShown: false
                     }}/>
             </Stack.Navigator>
