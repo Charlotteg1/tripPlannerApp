@@ -1,15 +1,16 @@
-import { Text, SafeAreaView, TextInput } from "react-native";
+import { Text, SafeAreaView, TextInput, Button } from "react-native";
 import { useState, useEffect } from "react";
 import Calendar from 'react-native-calendar-datepicker';
 import Moment from 'moment';
 import RNPickerSelect from 'react-native-picker-select';
 
 
-const AddTrip = () => {
+const AddTrip = ({navigation}) => {
     const [destinationName, setDesinationName] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [climateChoice, setClimateChoice] = useState();
+    const [errorMessage, setErrrorMessage] = useState();
 
     useEffect(() => {
         if (startDate) {
@@ -23,6 +24,14 @@ const AddTrip = () => {
 
     const handleEndDatePicked = (date)=>{
         setEndDate(date)
+    }
+
+    const handleAddTrip = () => {
+        // check no null values, if so display error (highlight entry with error in future)
+        // make the entries into json format and send to backend (POST request)
+        // display pop up to confirm (in future)
+        // naviagate back to trips page
+        navigation.navigate('trips')
     }
 
 
@@ -60,7 +69,7 @@ const AddTrip = () => {
         { label: 'Baltic', value: 'Baltic' },
       ]}
     />
-        <Text>Add trip</Text>
+        <Button onPress={()=> handleAddTrip()} title="Add Trip"/>
         </SafeAreaView>
     )
 };
