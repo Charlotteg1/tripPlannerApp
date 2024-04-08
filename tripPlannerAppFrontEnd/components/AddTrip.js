@@ -2,12 +2,14 @@ import { Text, SafeAreaView, TextInput } from "react-native";
 import { useState, useEffect } from "react";
 import Calendar from 'react-native-calendar-datepicker';
 import Moment from 'moment';
+import RNPickerSelect from 'react-native-picker-select';
 
 
 const AddTrip = () => {
     const [destinationName, setDesinationName] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
+    const [climateChoice, setClimateChoice] = useState();
 
     useEffect(() => {
         if (startDate) {
@@ -46,6 +48,18 @@ const AddTrip = () => {
         maxDate={Moment().add(1, 'years').startOf('day')}
         />
         {/* // climate (enum 5 others ( use images to reflect)) */}
+        <Text>Choose Climate:</Text>
+        <RNPickerSelect
+      onValueChange={(value) => setClimateChoice(value)}
+      placeholder={{ label: "Select a Climate", value: null }}
+      items={[
+        { label: 'Hot', value: 'Hot' },
+        { label: 'Warm', value: 'Warm' },
+        { label: 'Mild', value: 'Mild' },
+        { label: 'Chilly', value: 'Chilly' },
+        { label: 'Baltic', value: 'Baltic' },
+      ]}
+    />
         <Text>Add trip</Text>
         </SafeAreaView>
     )
