@@ -11,7 +11,7 @@ public class PackingListItem {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "individual_packing_list_id")
+    @JoinColumn(name = "packing_list_id")
     private PackingList packingList;
 
     @Column
