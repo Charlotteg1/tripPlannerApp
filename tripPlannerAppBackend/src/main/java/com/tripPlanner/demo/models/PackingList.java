@@ -5,22 +5,27 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "packing_list")
+@Table(name = "individual_packing_list")
 public class PackingList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "packingList")
+    @ManyToOne
+    @JoinColumn(name = "packing_list_id")
     private Trip trip;
 
-    @OneToMany(mappedBy = "packing_list")
-    private List<IndividualPackingList> individualPackingList;
+    @Column(name = "list_name")
+    private String listName;
 
-    public PackingList(Trip trip, List<IndividualPackingList> individualPackingList) {
+    @OneToMany(mappedBy = "individual_packing_list")
+    private List<PackingListItem> items;
+
+    public PackingList(Trip trip, String listName, List<PackingListItem> items) {
         this.trip = trip;
-        this.individualPackingList = individualPackingList;
+        this.listName = listName;
+        this.items = items;
     }
 
     public PackingList() {
@@ -42,13 +47,19 @@ public class PackingList {
         this.trip = trip;
     }
 
-    public List<IndividualPackingList> getIndividualPackingLists() {
-        return individualPackingList;
+    public String getListName() {
+        return listName;
     }
 
-    public void setIndividualPackingLists(List<IndividualPackingList> individualPackingList) {
-        this.individualPackingList = individualPackingList;
+    public void setListName(String listName) {
+        this.listName = listName;
     }
 
-//    need to have a remove individual packing list and an add one.
+    public List<PackingListItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<PackingListItem> items) {
+        this.items = items;
+    }
 }

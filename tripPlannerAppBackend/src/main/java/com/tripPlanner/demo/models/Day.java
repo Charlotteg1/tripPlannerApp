@@ -25,7 +25,7 @@ public class Day {
     @OneToMany(mappedBy = "day")
     private List<Activity> activities;
 
-    // may later change to many to many as can go to the same restaurant/food place numerous times in a trip
+    // may later change to, many to many as can go to the same restaurant/food place numerous times in a trip
     @OneToMany(mappedBy = "day")
     private List<Restaurant> restaurants;
 

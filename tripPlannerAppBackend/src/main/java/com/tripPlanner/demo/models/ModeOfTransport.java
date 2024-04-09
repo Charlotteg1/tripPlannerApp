@@ -1,6 +1,6 @@
 package com.tripPlanner.demo.models;
 
-public enum ModeOfTravel {
+public enum ModeOfTransport {
     Plane,
     Hirecar,
     Taxi,

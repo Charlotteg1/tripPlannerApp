@@ -1,6 +1,5 @@
 package com.tripPlanner.demo.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -29,11 +28,13 @@ public class Transportation {
     @Column(name = "arrival_time_and_date")
     private LocalDateTime arrivalTimeAndDate;
 
-    @Column(name = "mode_of_travel")
+    @Column(name = "mode_of_transport")
     @Enumerated(EnumType.STRING)
-    private ModeOfTravel mode;
+    private ModeOfTransport mode;
 
-    public Transportation(Trip trip, String departureDestination, String arrivalDestination, LocalDateTime departureTimeAndDate, LocalDateTime arrivalTimeAndDate, ModeOfTravel mode) {
+//    later enable user into input flight details(ie flight number & booking ref) if catching a fight or taxi company/driver/ car type depending on mode of transport choosen
+
+    public Transportation(Trip trip, String departureDestination, String arrivalDestination, LocalDateTime departureTimeAndDate, LocalDateTime arrivalTimeAndDate, ModeOfTransport mode) {
         this.trip = trip;
         this.departureDestination = departureDestination;
         this.arrivalDestination = arrivalDestination;
@@ -93,11 +94,11 @@ public class Transportation {
         this.arrivalTimeAndDate = arrivalTimeAndDate;
     }
 
-    public ModeOfTravel getMode() {
+    public ModeOfTransport getMode() {
         return mode;
     }
 
-    public void setMode(ModeOfTravel mode) {
+    public void setMode(ModeOfTransport mode) {
         this.mode = mode;
     }
 }

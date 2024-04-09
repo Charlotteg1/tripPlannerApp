@@ -3,7 +3,7 @@ package com.tripPlanner.demo.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "packing_list_item")
+@Table(name = "list_items")
 public class PackingListItem {
 
     @Id
@@ -12,7 +12,7 @@ public class PackingListItem {
 
     @ManyToOne
     @JoinColumn(name = "individual_packing_list_id")
-    private IndividualPackingList individualPackingList;
+    private PackingList packingList;
 
     @Column
     private boolean packed;
@@ -20,8 +20,8 @@ public class PackingListItem {
     @Column(name = "item_name")
     private String itemName;
 
-    public PackingListItem(IndividualPackingList individualPackingList, boolean packed, String itemName) {
-        this.individualPackingList = individualPackingList;
+    public PackingListItem(PackingList packingList, boolean packed, String itemName) {
+        this.packingList = packingList;
         this.packed = packed;
         this.itemName = itemName;
     }
@@ -37,12 +37,12 @@ public class PackingListItem {
         this.id = id;
     }
 
-    public IndividualPackingList getIndividualPackingList() {
-        return individualPackingList;
+    public PackingList getIndividualPackingList() {
+        return packingList;
     }
 
-    public void setIndividualPackingList(IndividualPackingList individualPackingList) {
-        this.individualPackingList = individualPackingList;
+    public void setIndividualPackingList(PackingList packingList) {
+        this.packingList = packingList;
     }
 
     public boolean isPacked() {
