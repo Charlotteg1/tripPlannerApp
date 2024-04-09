@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "individual_packing_list")
+@Table(name = "packing_lists")
 public class PackingList {
 
     @Id
@@ -13,13 +13,13 @@ public class PackingList {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "packing_list_id")
+    @JoinColumn(name = "trip_id")
     private Trip trip;
 
     @Column(name = "list_name")
     private String listName;
 
-    @OneToMany(mappedBy = "individual_packing_list")
+    @OneToMany(mappedBy = "packingList")
     private List<PackingListItem> items;
 
     public PackingList(Trip trip, String listName, List<PackingListItem> items) {

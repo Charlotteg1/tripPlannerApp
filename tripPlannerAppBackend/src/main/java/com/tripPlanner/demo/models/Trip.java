@@ -34,7 +34,7 @@ public class Trip {
 //  could later add business or leisure option, ie private boolean businessTrip
 
     @OneToMany(mappedBy = "trip")
-    private PackingList packingList;
+    private List<PackingList> packingList;
 
 //  is in trip (not in the day) as the transportation/ journey start date and end date may span across days
     @OneToMany(mappedBy = "trip")
@@ -48,7 +48,10 @@ public class Trip {
     //Constructor
 
 
-    public Trip(User user, String destination, LocalDate tripStartDate, LocalDate tripEndDate, Climate climate, PackingList packingList, List<Transportation> transportationList, List<Day> days) {
+    public Trip(User user, String destination, LocalDate tripStartDate, LocalDate tripEndDate, Climate climate, List<PackingList> packingList
+                ,List<Transportation> transportationList
+                , List<Day> days
+    ) {
         this.user = user;
         this.destination = destination;
         this.tripStartDate = tripStartDate;
@@ -113,13 +116,14 @@ public class Trip {
         this.climate = climate;
     }
 
-    public PackingList getIndividualPackingList() {
+    public List<PackingList> getPackingList() {
         return packingList;
     }
 
-    public void setIndividualPackingList(PackingList packingList) {
+    public void setPackingList(List<PackingList> packingList) {
         this.packingList = packingList;
     }
+
 
     public List<Transportation> getTransportationList() {
         return transportationList;
