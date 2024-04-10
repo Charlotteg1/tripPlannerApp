@@ -3,6 +3,7 @@ package com.tripPlanner.demo.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,12 +31,12 @@ public class User {
     private List<Trip> trips;
 
     //Constructor
-    public User(String forename, String surname, String email, String password, List<Trip> trips) {
+    public User(String forename, String surname, String email, String password) {
         this.forename = forename;
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.trips = trips;
+        this.trips = new ArrayList<>();
     }
 
     //Default Constructor
