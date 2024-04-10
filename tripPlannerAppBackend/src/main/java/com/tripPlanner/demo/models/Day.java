@@ -1,6 +1,5 @@
 package com.tripPlanner.demo.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -22,6 +21,10 @@ public class Day {
     @Column
     private LocalDate date;
 
+    @ManyToOne
+    @JoinColumn(name = "accommodation_id")
+    private Accommodation accommodation;
+
     @OneToMany(mappedBy = "day")
     private List<Activity> activities;
 
@@ -29,9 +32,10 @@ public class Day {
     @OneToMany(mappedBy = "day")
     private List<Restaurant> restaurants;
 
-    public Day(Trip trip, LocalDate date, List<Activity> activities, List<Restaurant> restaurants) {
+    public Day(Trip trip, LocalDate date, Accommodation accommodation, List<Activity> activities, List<Restaurant> restaurants) {
         this.trip = trip;
         this.date = date;
+        this.accommodation = accommodation;
         this.activities = activities;
         this.restaurants = restaurants;
     }
@@ -63,6 +67,22 @@ public class Day {
         this.date = date;
     }
 
+    public Accommodation getAccommodation() {
+        return accommodation;
+    }
+
+    public void setAccommodation(Accommodation accommodation) {
+        this.accommodation = accommodation;
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
+    }
+
     public List<Activity> getActivity() {
         return activities;
     }
@@ -78,4 +98,6 @@ public class Day {
     public void setRestaurants(List<Restaurant> restaurants) {
         this.restaurants = restaurants;
     }
+
+
 }
