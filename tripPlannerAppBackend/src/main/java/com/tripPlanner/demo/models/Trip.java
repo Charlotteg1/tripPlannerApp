@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -48,18 +49,15 @@ public class Trip {
     //Constructor
 
 
-    public Trip(User user, String destination, LocalDate tripStartDate, LocalDate tripEndDate, Climate climate, List<PackingList> packingList
-                ,List<Transportation> transportationList
-                , List<Day> days
-    ) {
+    public Trip(User user, String destination, LocalDate tripStartDate, LocalDate tripEndDate, Climate climate) {
         this.user = user;
         this.destination = destination;
         this.tripStartDate = tripStartDate;
         this.tripEndDate = tripEndDate;
         this.climate = climate;
-        this.packingList = packingList;
-        this.transportationList = transportationList;
-        this.days = days;
+        this.packingList = new ArrayList<>();
+        this.transportationList = new ArrayList<>();
+        this.days = new ArrayList<>();
     }
 
     //Default Constructor

@@ -18,6 +18,12 @@ public class Day {
     @JoinColumn(name = "trip_id")
     private Trip trip;
 
+
+//    can default to destination of trip
+    @Column
+    private String destination;
+
+
     @Column
     private LocalDate date;
 
@@ -32,8 +38,9 @@ public class Day {
     @OneToMany(mappedBy = "day")
     private List<Restaurant> restaurants;
 
-    public Day(Trip trip, LocalDate date, Accommodation accommodation, List<Activity> activities, List<Restaurant> restaurants) {
+    public Day(Trip trip, String destination, LocalDate date, Accommodation accommodation, List<Activity> activities, List<Restaurant> restaurants) {
         this.trip = trip;
+        this.destination = destination;
         this.date = date;
         this.accommodation = accommodation;
         this.activities = activities;
@@ -57,6 +64,14 @@ public class Day {
 
     public void setTrip(Trip trip) {
         this.trip = trip;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
     public LocalDate getDate() {
