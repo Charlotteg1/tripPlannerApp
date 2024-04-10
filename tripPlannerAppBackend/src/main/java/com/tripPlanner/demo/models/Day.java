@@ -27,8 +27,7 @@ public class Day {
     @Column
     private LocalDate date;
 
-    @ManyToOne
-    @JoinColumn(name = "accommodation_id")
+    @OneToOne
     private Accommodation accommodation;
 
     @OneToMany(mappedBy = "day")
