@@ -2,6 +2,7 @@ package com.tripPlanner.demo.controllers;
 
 import com.tripPlanner.demo.models.Trip;
 import com.tripPlanner.demo.models.dtos.TripDTO;
+import com.tripPlanner.demo.services.DayService;
 import com.tripPlanner.demo.services.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,9 @@ public class TripController {
 
     @Autowired
     TripService tripService;
+
+    @Autowired
+    DayService dayService;
 
     @GetMapping("/{id}")
     public ResponseEntity<Trip> findTripById(@PathVariable Long id){
@@ -42,6 +46,7 @@ public class TripController {
     public ResponseEntity<Trip> addTrip(@RequestBody TripDTO tripDTO){
         Trip newTrip = tripService.addTrip(tripDTO);
         if(newTrip!=null){
+            dayService.generateDaysForTrip(newTrip);
             return new ResponseEntity<>(newTrip, HttpStatus.CREATED);
         }else{
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

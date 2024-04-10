@@ -44,8 +44,9 @@ public class TripService {
 //        and that it is after any end dates for prev trips.
 //        same for end date of trip
         User user = userRepository.findById(tripDTO.getUserId()).get();
-            Trip trip = new Trip(user, tripDTO.getDestination(), tripDTO.getTripStartDate(), tripDTO.getTripEndDate(),tripDTO.getClimate());
-            return tripRepository.save(trip);
+        Trip trip = new Trip(user, tripDTO.getDestination(), tripDTO.getTripStartDate(), tripDTO.getTripEndDate(),tripDTO.getClimate());
+        return tripRepository.save(trip);
+
     }
 
     public Trip updateTrip(Long tripId, TripDTO tripDTO){
