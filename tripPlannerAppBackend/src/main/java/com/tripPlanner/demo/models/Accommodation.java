@@ -3,15 +3,12 @@ package com.tripPlanner.demo.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "accommodation")
+@Table(name = "accommodations")
 public class Accommodation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToOne
-    private Day day;
 
     @Column
     private String name;
@@ -26,8 +23,7 @@ public class Accommodation {
     @Column
     private String address;
 
-    public Accommodation(Day day, String name, AccommodationType type, String bookingDetails, String address) {
-        this.day = day;
+    public Accommodation( String name, AccommodationType type, String bookingDetails, String address) {
         this.name = name;
         this.type = type;
         this.bookingDetails = bookingDetails;
@@ -43,14 +39,6 @@ public class Accommodation {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Day getDay() {
-        return day;
-    }
-
-    public void setDay(Day day) {
-        this.day = day;
     }
 
     public String getName() {
