@@ -3,6 +3,7 @@ package com.tripPlanner.demo.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,6 @@ public class Day {
     @Column
     private String destination;
 
-
     @Column
     private LocalDate date;
 
@@ -38,13 +38,13 @@ public class Day {
     @OneToMany(mappedBy = "day")
     private List<Restaurant> restaurants;
 
-    public Day(Trip trip, String destination, LocalDate date, Accommodation accommodation, List<Activity> activities, List<Restaurant> restaurants) {
+    public Day(Trip trip, String destination, LocalDate date, Accommodation accommodation) {
         this.trip = trip;
         this.destination = destination;
         this.date = date;
         this.accommodation = accommodation;
-        this.activities = activities;
-        this.restaurants = restaurants;
+        this.activities = new ArrayList<>();
+        this.restaurants = new ArrayList<>();
     }
 
     public Day() {
@@ -95,14 +95,6 @@ public class Day {
     }
 
     public void setActivities(List<Activity> activities) {
-        this.activities = activities;
-    }
-
-    public List<Activity> getActivity() {
-        return activities;
-    }
-
-    public void setActivity(List<Activity> activities) {
         this.activities = activities;
     }
 

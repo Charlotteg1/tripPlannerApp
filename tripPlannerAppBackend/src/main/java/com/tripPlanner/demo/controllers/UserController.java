@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 //    get user by id
 //    add user
@@ -56,7 +57,5 @@ public class UserController {
         User updateUser = userService.updateUser(id, forename, surname);
         return new ResponseEntity<>(updateUser, HttpStatus.OK);
     }
-
-
 
 }

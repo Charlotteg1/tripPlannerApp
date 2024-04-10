@@ -1,9 +1,7 @@
 package com.tripPlanner.demo.controllers;
 
 import com.tripPlanner.demo.models.Trip;
-import com.tripPlanner.demo.models.User;
 import com.tripPlanner.demo.models.dtos.TripDTO;
-import com.tripPlanner.demo.models.dtos.UserDTO;
 import com.tripPlanner.demo.services.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/trip")
 public class TripController {
 
     @Autowired
@@ -22,15 +21,15 @@ public class TripController {
     @GetMapping("/{id}")
     public ResponseEntity<Trip> findTripById(@PathVariable Long id){
         Trip findTrip = tripService.getTripById(id);
-        if(findTrip!=null){
+        if(findTrip != null){
             return new ResponseEntity<>(findTrip, HttpStatus.FOUND);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @GetMapping("/user/{user_id}")
-    public ResponseEntity<List<Trip>> findUserById(@PathVariable Long userId){
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Trip>> findTripsByUser(@PathVariable Long userId){
         List<Trip> findTrips = tripService.getAllUsersTrips(userId);
         if(findTrips!=null){
             return new ResponseEntity<>(findTrips, HttpStatus.FOUND);

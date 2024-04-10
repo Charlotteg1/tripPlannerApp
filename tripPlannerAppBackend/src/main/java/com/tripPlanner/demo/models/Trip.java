@@ -39,11 +39,9 @@ public class Trip {
 
 //  is in trip (not in the day) as the transportation/ journey start date and end date may span across days
     @OneToMany(mappedBy = "trip")
-    @JsonIgnoreProperties("trips")
     private List<Transportation> transportationList;
 
     @OneToMany(mappedBy = "trip")
-    @JsonIgnoreProperties({"trips"})
     private List<Day> days;
 
     //Constructor
@@ -70,7 +68,7 @@ public class Trip {
         return id;
     }
 
-    public void setId(Long Id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
