@@ -2,6 +2,7 @@ package com.tripPlanner.demo.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,10 +23,10 @@ public class PackingList {
     @OneToMany(mappedBy = "packingList")
     private List<PackingListItem> items;
 
-    public PackingList(Trip trip, String listName, List<PackingListItem> items) {
+    public PackingList(Trip trip, String listName) {
         this.trip = trip;
         this.listName = listName;
-        this.items = items;
+        this.items = new ArrayList<>();
     }
 
     public PackingList() {
