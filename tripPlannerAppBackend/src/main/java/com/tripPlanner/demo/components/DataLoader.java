@@ -27,12 +27,12 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception{
 
-        User user1 = new User("Mia", "Westbrook","mia.westbrook@gmail.com", "mw123" );
+        User user1 = new User("Mia", "Westbrook","mia.westbrook@gmail.com", "mw123");
         userRepository.save(user1);
         User user2 = new User("Kai","Gem", "kairileyg@hotmail.com", "Ketchup353");
         userRepository.save(user2);
 
-        Trip trip1 = new Trip(user1, "New York City", LocalDate.of(2024, 5, 23), LocalDate.of(2024,5,29), Climate.Mild);
+        Trip trip1 = new Trip(user2, "New York City", LocalDate.of(2024, 5, 23), LocalDate.of(2024,5,29), Climate.Mild);
         tripRepository.save(trip1);
         Trip trip2 = new Trip(user2, "Thailand", LocalDate.of(2024, 6, 3), LocalDate.of(2024,6,19), Climate.Hot);
         tripRepository.save(trip2);

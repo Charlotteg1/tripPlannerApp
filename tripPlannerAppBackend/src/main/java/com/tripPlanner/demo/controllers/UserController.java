@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -43,7 +45,9 @@ public class UserController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<User> checkLogin(@RequestParam String email, @RequestParam String password){
+    public ResponseEntity<User> checkLogin(@RequestBody Map<String, String> requestBody){
+        String email = requestBody.get("email");
+        String password = requestBody.get("password");
         User checkedUser = userService.checkLoginCredentials(email,password);
         if(checkedUser!=null){
             return new ResponseEntity<>(checkedUser, HttpStatus.OK);
