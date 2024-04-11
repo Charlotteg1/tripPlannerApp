@@ -37,11 +37,11 @@ public class PackingListItem {
         this.id = id;
     }
 
-    public PackingList getIndividualPackingList() {
+    public PackingList getPackingList() {
         return packingList;
     }
 
-    public void setIndividualPackingList(PackingList packingList) {
+    public void setPackingList(PackingList packingList) {
         this.packingList = packingList;
     }
 
