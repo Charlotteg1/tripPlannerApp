@@ -48,6 +48,16 @@ public class PackingListController {
         return new ResponseEntity<>(HttpStatus.GONE);
     }
 
+    @GetMapping("/itemsInList/{listId}")
+    public ResponseEntity<List<PackingListItem>> itemsInPackingList(@PathVariable Long listId){
+        List<PackingListItem> items = packingListService.itemsInList(listId);
+        if(items!=null){
+            return new ResponseEntity<>(items, HttpStatus.FOUND);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
     @PostMapping("/addItem/{listId}")
     public ResponseEntity<PackingList> addItemToList(@PathVariable Long listId, @RequestBody Map<String, String> requestBody){
         String itemName = requestBody.get("itemName");

@@ -53,6 +53,11 @@ public class PackingListService {
         packingListRepository.deleteById(id);
     }
 
+    public List<PackingListItem> itemsInList(Long listId){
+        PackingList packingList = packingListRepository.findById(listId).get();
+        return packingList.getItems();
+    }
+
     public PackingList addNewItem(Long packingListId, String itemName){
         PackingList packingList= packingListRepository.findById(packingListId).get();
         PackingListItem newItem = new PackingListItem(packingList,false, itemName);
