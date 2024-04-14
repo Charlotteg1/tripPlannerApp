@@ -1,6 +1,7 @@
 package com.tripPlanner.demo.controllers;
 
 import com.tripPlanner.demo.models.PackingList;
+import com.tripPlanner.demo.models.PackingListItem;
 import com.tripPlanner.demo.services.PackingListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,6 +47,35 @@ public class PackingListController {
         packingListService.deletePackingList(id);
         return new ResponseEntity<>(HttpStatus.GONE);
     }
+
+    @PostMapping("/addItem/{listId}")
+    public ResponseEntity<PackingList> addItemToList(@PathVariable Long listId, @RequestBody Map<String, String> requestBody){
+        String itemName = requestBody.get("itemName");
+        PackingList packingList = packingListService.addNewItem(listId, itemName);
+        if(packingList!=null){
+            return new ResponseEntity<>(packingList, HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+
+    @DeleteMapping("/deleteItem/{itemId}")
+    public ResponseEntity<Void> deleteItem(@PathVariable Long itemId){
+        packingListService.deleteItem(itemId);
+        return new ResponseEntity<>(HttpStatus.GONE);
+    }
+
+    @PostMapping("/updateItem/{itemId}")
+    public ResponseEntity<PackingListItem> updateItem(@PathVariable Long itemId){
+        PackingListItem updateItem = packingListService.updateItem(itemId);
+        if(updateItem!=null){
+            return new ResponseEntity<>(updateItem, HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
 
 
 }
