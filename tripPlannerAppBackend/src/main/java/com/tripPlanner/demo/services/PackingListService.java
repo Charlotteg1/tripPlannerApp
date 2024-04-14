@@ -44,6 +44,12 @@ public class PackingListService {
     }
 
     public void deletePackingList(Long id){
+        PackingList packingListToDelete = packingListRepository.findById(id).get();
+        List<PackingListItem> items = packingListToDelete.getItems();
+
+        for (PackingListItem item : items) {
+            packingListItemRepository.delete(item);
+        }
         packingListRepository.deleteById(id);
     }
 
@@ -65,5 +71,5 @@ public class PackingListService {
         packingListItemRepository.save(itemToUpdate);
         return itemToUpdate;
     }
-    
+
 }
