@@ -1,5 +1,6 @@
 package com.tripPlanner.demo.models;
 
+import com.tripPlanner.demo.models.enums.ModeOfTransport;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

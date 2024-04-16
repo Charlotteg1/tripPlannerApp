@@ -1,8 +1,6 @@
 package com.tripPlanner.demo.models.dtos;
 
-import com.tripPlanner.demo.models.Climate;
-import com.tripPlanner.demo.models.User;
-import jakarta.persistence.*;
+import com.tripPlanner.demo.models.enums.Climate;
 
 import java.time.LocalDate;
 

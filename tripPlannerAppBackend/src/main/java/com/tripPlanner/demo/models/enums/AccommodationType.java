@@ -1,4 +1,4 @@
-package com.tripPlanner.demo.models;
+package com.tripPlanner.demo.models.enums;
 
 public enum AccommodationType {
     HOTEL,

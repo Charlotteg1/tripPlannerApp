@@ -1,6 +1,6 @@
 package com.tripPlanner.demo.components;
 
-import com.tripPlanner.demo.models.Climate;
+import com.tripPlanner.demo.models.enums.Climate;
 import com.tripPlanner.demo.models.Trip;
 import com.tripPlanner.demo.models.User;
 import com.tripPlanner.demo.repostitories.TripRepository;

@@ -1,6 +1,7 @@
 package com.tripPlanner.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.tripPlanner.demo.models.enums.Meal;
 import jakarta.persistence.*;
 
 import java.util.List;
