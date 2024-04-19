@@ -1,6 +1,5 @@
 package com.tripPlanner.demo.controllers;
 
-import com.tripPlanner.demo.models.Accommodation;
 import com.tripPlanner.demo.models.Activity;
 import com.tripPlanner.demo.models.dtos.ActivityDTO;
 import com.tripPlanner.demo.services.ActivityService;
