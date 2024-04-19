@@ -48,7 +48,7 @@ public class AccommodationController {
     }
 
     @GetMapping("/day/{dayId}")
-    public ResponseEntity<Accommodation> findAccommdationOnDay(@PathVariable Long dayId){
+    public ResponseEntity<Accommodation> findAccommodationOnDay(@PathVariable Long dayId){
         Accommodation accommodation = accommodationService.getAccommodationByDay(dayId);
         if(accommodation !=null){
             return new ResponseEntity<>(accommodation, HttpStatus.FOUND);
