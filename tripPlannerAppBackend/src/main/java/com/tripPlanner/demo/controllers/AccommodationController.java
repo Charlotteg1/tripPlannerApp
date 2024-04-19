@@ -2,7 +2,6 @@ package com.tripPlanner.demo.controllers;
 
 
 import com.tripPlanner.demo.models.Accommodation;
-import com.tripPlanner.demo.models.Day;
 import com.tripPlanner.demo.models.dtos.AccommodationDTO;
 import com.tripPlanner.demo.services.AccommodationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-@RequestMapping(name = "accommodation")
+@RequestMapping(name = "/accommodation")
 public class AccommodationController {
 
     @Autowired

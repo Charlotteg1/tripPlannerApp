@@ -76,7 +76,7 @@ public class PackingListController {
         return new ResponseEntity<>(HttpStatus.GONE);
     }
 
-    @PostMapping("/updateItem/{itemId}")
+    @PutMapping("/updateItem/{itemId}")
     public ResponseEntity<PackingListItem> updateItem(@PathVariable Long itemId){
         PackingListItem updateItem = packingListService.updateItem(itemId);
         if(updateItem!=null){

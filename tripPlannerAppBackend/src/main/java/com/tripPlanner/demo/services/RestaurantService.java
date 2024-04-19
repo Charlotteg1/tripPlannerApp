@@ -1,6 +1,7 @@
 package com.tripPlanner.demo.services;
 
 import com.tripPlanner.demo.models.*;
+import com.tripPlanner.demo.models.dtos.ItemConsumedDTO;
 import com.tripPlanner.demo.models.dtos.RestaurantDTO;
 import com.tripPlanner.demo.repostitories.DayRepository;
 import com.tripPlanner.demo.repostitories.ItemConsumedRepository;
@@ -81,4 +82,34 @@ public class RestaurantService {
     }
 
 
+    public ItemConsumed addItemConsumed(ItemConsumedDTO itemConsumedDTO){
+        Restaurant restaurant = restaurantRepository.findById(itemConsumedDTO.getRestaurantId()).get();
+        ItemConsumed addItem = new ItemConsumed(restaurant, itemConsumedDTO.getName(), itemConsumedDTO.getRating(), itemConsumedDTO.getNotes());
+        itemConsumedRepository.save(addItem);
+        return addItem;
+    }
+
+    public void deleteItemConsumed(Long id){
+        itemConsumedRepository.deleteById(id);
+    }
+
+
+    public ItemConsumed updateItem(Long itemId, ItemConsumedDTO itemConsumedDTO){
+        ItemConsumed itemToUpdate = itemConsumedRepository.findById(itemId).get();
+
+        if(itemConsumedDTO.getName() != null){
+            itemToUpdate.setName(itemConsumedDTO.getName());
+        }else if(itemConsumedDTO.getRating() != null){
+            itemToUpdate.setRating(itemConsumedDTO.getRating());
+        }else if(itemConsumedDTO.getNotes() != null){
+            itemToUpdate.setNotes(itemConsumedDTO.getNotes());
+        }
+        itemConsumedRepository.save(itemToUpdate);
+        return itemToUpdate;
+    }
+
+    public List<ItemConsumed> getItemsConsumedInRestaurant(Long restaurantId){
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
+        return restaurant.getItemsConsumed();
+    }
 }
