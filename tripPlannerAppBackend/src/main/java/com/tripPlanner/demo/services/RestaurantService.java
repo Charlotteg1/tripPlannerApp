@@ -66,7 +66,7 @@ public class RestaurantService {
         return day.getRestaurants();
     }
 
-    public List<Restaurant> getAllRestaurantInTrip(Long tripId){
+    public List<Restaurant> getAllRestaurantsInTrip(Long tripId){
         Trip trip = tripRepository.findById(tripId).get();
         List<Restaurant> restaurants = new ArrayList<>();
         for(Day day: trip.getDays()){
