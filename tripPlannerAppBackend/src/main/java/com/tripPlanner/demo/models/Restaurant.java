@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tripPlanner.demo.models.enums.Meal;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,11 +34,11 @@ public class Restaurant {
     @Column(name = "would_visit_again")
     private Boolean wouldVisitAgain; // may change to recommend
 
-    public Restaurant(Day day, String name, List<Meal> meal, List<ItemConsumed> itemsConsumed, Float establishmentRating, Boolean wouldVisitAgain) {
+    public Restaurant(Day day, String name, List<Meal> meal, Float establishmentRating, Boolean wouldVisitAgain) {
         this.day = day;
         this.name = name;
         this.meal = meal;
-        this.itemsConsumed = itemsConsumed;
+        this.itemsConsumed = new ArrayList<>();
         this.establishmentRating = establishmentRating;
         this.wouldVisitAgain = wouldVisitAgain;
     }

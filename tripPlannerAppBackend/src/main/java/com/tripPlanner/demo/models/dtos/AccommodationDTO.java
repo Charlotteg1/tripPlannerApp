@@ -1,10 +1,6 @@
 package com.tripPlanner.demo.models.dtos;
 
-import com.tripPlanner.demo.models.Day;
 import com.tripPlanner.demo.models.enums.AccommodationType;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 
 import java.util.List;
 
