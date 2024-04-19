@@ -40,5 +40,5 @@ public class AccommodationService {
     public void deleteAccommodation(Long accommodationId){
         accommodationRepository.deleteById(accommodationId);
     }
-    
+
 }
