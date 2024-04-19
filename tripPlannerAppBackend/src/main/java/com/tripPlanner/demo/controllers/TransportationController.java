@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-@RequestMapping(name = "accommodation")
+@RequestMapping(name = "transportation")
 public class TransportationController {
 
     @Autowired
