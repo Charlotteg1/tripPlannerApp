@@ -49,7 +49,13 @@ public class Accommodation {
         this.id = id;
     }
 
+    public List<Day> getDays() {
+        return days;
+    }
 
+    public void setDays(List<Day> days) {
+        this.days = days;
+    }
 
     public String getName() {
         return name;
