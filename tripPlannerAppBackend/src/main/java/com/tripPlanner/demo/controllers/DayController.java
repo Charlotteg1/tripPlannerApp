@@ -30,7 +30,7 @@ public class DayController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Day> editDAy(@PathVariable Long id, @RequestBody Map<String, String> requestBody){
+    public ResponseEntity<Day> editDay(@PathVariable Long id, @RequestBody Map<String, String> requestBody){
         String destination = requestBody.get("destination");
         Day updateDay = dayService.updateDay(id, destination);
         if(updateDay!=null){
