@@ -36,7 +36,6 @@ public class DataLoader implements ApplicationRunner {
         tripRepository.save(trip1);
         Trip trip2 = new Trip(user2, "Thailand", LocalDate.of(2024, 6, 3), LocalDate.of(2024,6,19), Climate.Hot);
         tripRepository.save(trip2);
-
     }
 
 

@@ -105,6 +105,4 @@ public class Day {
     public void setRestaurants(List<Restaurant> restaurants) {
         this.restaurants = restaurants;
     }
-
-
 }

@@ -19,6 +19,7 @@ public class Restaurant {
     @JoinColumn(name = "day_id")
     @JsonIgnoreProperties({"days"})
     private Day day;
+
     @Column
     private String name;
 

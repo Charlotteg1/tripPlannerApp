@@ -2,8 +2,10 @@ package com.tripPlanner.demo.controllers;
 
 
 import com.tripPlanner.demo.models.Activity;
+import com.tripPlanner.demo.models.ItemConsumed;
 import com.tripPlanner.demo.models.Restaurant;
 import com.tripPlanner.demo.models.dtos.ActivityDTO;
+import com.tripPlanner.demo.models.dtos.ItemConsumedDTO;
 import com.tripPlanner.demo.models.dtos.RestaurantDTO;
 import com.tripPlanner.demo.services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +79,40 @@ public class RestaurantController {
         }
     }
 
+    @PostMapping("/item")
+    public ResponseEntity<ItemConsumed> addItem(@RequestBody ItemConsumedDTO itemConsumedDTO){
+        ItemConsumed addNewItem = restaurantService.addItemConsumed(itemConsumedDTO);
+        if(addNewItem !=null){
+            return new ResponseEntity<>(addNewItem, HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
 
+    @DeleteMapping("/item/{itemId}")
+    public ResponseEntity<Void> deleteItem (@PathVariable Long itemId){
+        restaurantService.deleteItemConsumed(itemId);
+        return new ResponseEntity<>(HttpStatus.GONE);
+    }
+
+
+    @PutMapping("/item/{itemId}")
+    public ResponseEntity<ItemConsumed> updateItem(@PathVariable Long itemId , @RequestBody ItemConsumedDTO itemConsumedDTO) {
+        ItemConsumed updateItem = restaurantService.updateItem(itemId, itemConsumedDTO);
+        if (updateItem != null) {
+            return new ResponseEntity<>(updateItem, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @GetMapping("/item/{restaurantId}")
+    public ResponseEntity<List<ItemConsumed>> findItemsConsumedInRestaurant(@PathVariable Long restaurantId){
+        List<ItemConsumed> items = restaurantService.getItemsConsumedInRestaurant(restaurantId);
+        if(items !=null){
+            return new ResponseEntity<>(items, HttpStatus.FOUND);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
 }

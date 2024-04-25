@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-@RequestMapping(name = "/accommodation")
+@RequestMapping("/accommodation")
 public class AccommodationController {
 
     @Autowired
