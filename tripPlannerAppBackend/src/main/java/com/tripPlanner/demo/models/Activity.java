@@ -1,5 +1,6 @@
 package com.tripPlanner.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
@@ -24,6 +25,7 @@ public class Activity {
     @Column
     private String notes;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name ="day_id")
     private Day day;
