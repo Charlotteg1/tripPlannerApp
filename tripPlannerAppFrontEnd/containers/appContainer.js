@@ -15,10 +15,13 @@ const AppContainer = () => {
                     <Stack.Screen name="login" component={Login} options={{
                         headerShown: false
                     } } />
-                     <Stack.Screen name="trips" component={TripList} options={{
+                    <Stack.Screen name="trips" component={TripList} options={{
                         headerShown: false
                     }}/>
-                     <Stack.Screen name="addTrips" component={AddTrip} options={{
+                    <Stack.Screen name="addTrips" component={AddTrip} options={{
+                        headerShown: false
+                    }}/>
+                    <Stack.Screen name="individualTrip" component={Trip} options={{
                         headerShown: false
                     }}/>
             </Stack.Navigator>

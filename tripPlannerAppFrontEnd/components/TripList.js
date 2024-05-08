@@ -1,16 +1,17 @@
-import { SafeAreaView , Text, Pressable, StyleSheet} from "react-native"
-import { useState } from "react"
+import { SafeAreaView , Text, Pressable, StyleSheet} from "react-native";
+import { useState, useEffect} from "react";
+import TripListItem from './TripListItem';
 
 const TripList = ({navigation}) =>{
 
     const [trips, setTrips] = useState()
-    const [currentTripId, setCurrentTripId] = useState()
-    const [futureTripIds, setFutureTripIds] = useState()
-    const [pastTripIds, setPastTripIds] = useState()
-    const [currentUserId, setCurrentUserId] = useState(2);
+    const [currentTrip, setCurrentTrip] = useState()
+    const [futureTrips, setFutureTrips] = useState([])
+    const [pastTrips, setPastTrips] = useState([])
+    const [currentUser, setCurrentUser] = useState(2);
 
     const fetchTrips = async () => {
-        const url = `http://localhost:8080/user/authenticate/user/${currentUserId}`;
+        const url = `http://localhost:8080/trip/user/${currentUser}`;
         const response = await fetch(url);
         const data = await response.json();
 
@@ -26,6 +27,48 @@ const TripList = ({navigation}) =>{
       fetchTrips();
     },[]);
 
+    const sortTrips = () =>{
+        // need to go through each trip and add to either current, past, upcoming
+        const futureTripsArray = [];
+        const pastTripsArray = [];
+        let currentTripHolder = null;
+        const currentDate = new Date();
+        if(trips){
+            trips.forEach(trip => {
+                const tripStartDate = new Date(trip.tripStartDate);
+                const tripEndDate = new Date(trip.tripEndDate);
+
+                if (tripStartDate < currentDate){
+                    futureTripsArray.push(trip);
+                }else if (tripEndDate > currentDate){
+                    pastTripsArray.push(trip);
+                }else{
+                    currentTripHolder = trip
+                }
+            })
+            
+            setCurrentTrip(currentTripHolder)
+            setFutureTrips(futureTripsArray)
+            setPastTrips(pastTripsArray)
+            console.log(futureTripsArray)
+            console.log(pastTripsArray)
+        }
+    };
+
+    useEffect(() => {
+        sortTrips();
+    }, [trips]);
+
+    const displayTrips = (tripsToDisplay) => {
+        console.log("mapping trips to display")
+        return tripsToDisplay?.map((trip) => {
+            console.log(trip)
+                return (
+                <SafeAreaView key={trip.id}>
+                    <TripListItem trip={trip}/>
+                </SafeAreaView>)
+            })
+    }
 
 
     return(
@@ -33,12 +76,24 @@ const TripList = ({navigation}) =>{
         <Pressable style={styles.addTrip} onPress={()=>navigation.navigate('addTrips')}>
             <Text style={[styles.addTripText, { textAlign: 'center' }]}>Add Trip</Text>
         </Pressable>
-        {currentTripId && futureTripIds &&  pastTripIds && <Text>Loading...</Text>} 
+        {currentTrip && futureTrips &&  pastTrips && <Text>Loading...</Text>} 
         {/* check below if equals null  */}
-        {currentTripId && futureTripIds &&  pastTripIds && <Text>You have no trips please add trip to display</Text>} 
-        {currentTripId && <Text>Current Trip</Text>}
-        {futureTripIds && <Text>Future Trips</Text>}
-        {pastTripIds && <Text>Past Trips</Text>}
+        {!currentTrip && !futureTrips &&  !pastTrips && <Text>You have no trips please add trip to display</Text>} 
+        {currentTrip && (<>
+            <Text>Current Trip</Text>
+            {displayTrips([currentTrip])}
+            </>
+        )}
+        {futureTrips.length!=0 && (<>
+            <Text>Future Trips</Text>
+            {displayTrips(futureTrips)}
+            </>
+        )}
+        {pastTrips.length!=0 && (<>
+            <Text>Past Trips</Text>
+            {displayTrips(pastTrips)}
+            </>
+        )}
     </SafeAreaView>)
     }
 
