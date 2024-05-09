@@ -1,6 +1,6 @@
 import { Pressable, SafeAreaView, StyleSheet, Text} from "react-native";
 
-const TripListItem = ({trip}) => {
+const TripListItem = ({trip, navigation}) => {
 
     // calculating trip length
     const startDate = new Date(trip.tripStartDate);
@@ -14,6 +14,7 @@ const TripListItem = ({trip}) => {
                 <Text style={styles.destination}>{trip.destination}</Text>
                 <Text style={styles.dates}>{trip.tripStartDate} - {trip.tripEndDate}</Text>
                 <Text style={styles.tripLength}>{numOfDays} days</Text>
+                {/* add > symbol to right */}
             </Pressable>
         </SafeAreaView>
     )

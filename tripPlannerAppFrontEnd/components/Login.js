@@ -71,6 +71,7 @@ const Login = ({navigation}) => {
     <View style={styles.errorBox}>
      <Text style={styles.error}>Error : {error}</Text>
     </View>
+    // create new account option below
     }
     </SafeAreaView>)
 }
