@@ -24,6 +24,9 @@ const AppContainer = () => {
                     <Stack.Screen name="individualTrip" component={Trip} options={{
                         headerShown: false
                     }}/>
+                    <Stack.Screen name="packingLists" component={PackingList} options={{
+                        headerShown: false
+                    }}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

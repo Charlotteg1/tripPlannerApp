@@ -10,7 +10,7 @@ const TripListItem = ({trip, navigation}) => {
 
     return (
         <SafeAreaView >
-            <Pressable style={styles.tripBox} onPress={()=>navigation.navigate('individualTrip' , { viewTrip: trip })}>
+            <Pressable style={styles.tripBox} onPress={()=>navigation.navigate('individualTrip' , { viewTrip: trip , numOfDays : numOfDays})}>
                 <Text style={styles.destination}>{trip.destination}</Text>
                 <Text style={styles.dates}>{trip.tripStartDate} - {trip.tripEndDate}</Text>
                 <Text style={styles.tripLength}>{numOfDays} days</Text>
@@ -21,7 +21,7 @@ const TripListItem = ({trip, navigation}) => {
 }
 const styles = StyleSheet.create({
     tripBox: {
-        backgroundColor: 'beige',
+        backgroundColor: 'light grey',
         borderRadius:10,
         borderColor: 'navy',
         padding:10,
