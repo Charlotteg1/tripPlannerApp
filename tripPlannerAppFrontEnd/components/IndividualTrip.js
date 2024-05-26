@@ -1,6 +1,6 @@
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, Text, Pressable, StyleSheet } from "react-native";
 
-const Trip = ({viewTrip, numOfDays, navigation}) => {
+const IndividualTrip = ({viewTrip, numOfDays, navigation}) => {
 
     return (
     <SafeAreaView>
@@ -33,5 +33,4 @@ const styles = StyleSheet.create({
         color: 'pink',
         margin: 2,
     }
-});
-export default Trip;
+});export default IndividualTrip;
