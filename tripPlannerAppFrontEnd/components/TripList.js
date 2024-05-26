@@ -65,7 +65,7 @@ const TripList = ({navigation}) =>{
             console.log(trip)
                 return (
                 <SafeAreaView key={trip.id}>
-                    <TripListItem trip={trip}/>
+                    <TripListItem trip={trip} navigation={navigation}/>
                 </SafeAreaView>)
             })
     }
@@ -80,7 +80,7 @@ const TripList = ({navigation}) =>{
         {/* check below if equals null  */}
         {!currentTrip && !futureTrips &&  !pastTrips && <Text>You have no trips please add trip to display</Text>} 
         {currentTrip && (<>
-            <Text>Current Trip</Text>
+            <Text style={styles.}>Current Trip</Text>
             {displayTrips([currentTrip])}
             </>
         )}
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     addTrip: {
         alignSelf: 'center',
         marginTop: 2,
-        backgroundColor: '#80DBA1',
+        backgroundColor: '#30DBE2',
         padding: 8,
         borderRadius:10,
         width: 100,

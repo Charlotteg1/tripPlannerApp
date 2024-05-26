@@ -4,7 +4,7 @@ const IndividualTrip = ({viewTrip, numOfDays, navigation}) => {
 
     return (
     <SafeAreaView>
-        <Pressable style={styles.packingListButton} onPress={()=>navigation.navigate('packingLists')}>
+        <Pressable style={styles.packingListButton} onPress={(()=>navigation.navigate('packingLists'), { tripId : trip.id, navigation:navigation})}>
             <Text style={[styles.packingListText, { textAlign: 'center' }]}>View Packing List</Text>
         </Pressable>
         <Text style={styles.destination}>{viewTrip.destination}</Text>
