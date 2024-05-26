@@ -1,5 +1,6 @@
 package com.tripPlanner.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tripPlanner.demo.models.enums.ModeOfTransport;
 import jakarta.persistence.*;
 
@@ -13,6 +14,7 @@ public class Transportation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "trip_id")
     private Trip trip; // may be more wise to change to day, relating to day by day
