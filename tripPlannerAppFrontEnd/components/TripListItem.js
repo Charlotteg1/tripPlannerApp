@@ -28,16 +28,29 @@ const styles = StyleSheet.create({
         margin: 5,
     },
     destination: {
-        color: '#80D34E',
+        color: '#80D3B6',
         margin: 2,
+        fontWeight: '800'
     },
     dates: {
         margin: 2,
     },
     tripLength: {
-        color: 'pink',
+        color: 'navy',
         margin: 2,
-    }
+    },
+    tripBox: {
+        alignSelf: 'center',
+        marginTop: 2,
+        backgroundColor: 'beige',
+        padding: 5,
+        borderRadius:10,
+        width: '96%',
+        shadowOpacity: '0.4%',
+        shadowColor: '#775204',
+        shadowOffset: { width: 1, height: 3},
+        shadowRadius: 7,
+    },
 });
 export default TripListItem;
 

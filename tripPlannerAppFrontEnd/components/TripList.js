@@ -1,4 +1,4 @@
-import { SafeAreaView , Text, Pressable, StyleSheet} from "react-native";
+import { SafeAreaView , View,  Text, Pressable, StyleSheet} from "react-native";
 import { useState, useEffect} from "react";
 import TripListItem from './TripListItem';
 
@@ -50,8 +50,6 @@ const TripList = ({navigation}) =>{
             setCurrentTrip(currentTripHolder)
             setFutureTrips(futureTripsArray)
             setPastTrips(pastTripsArray)
-            console.log(futureTripsArray)
-            console.log(pastTripsArray)
         }
     };
 
@@ -60,11 +58,9 @@ const TripList = ({navigation}) =>{
     }, [trips]);
 
     const displayTrips = (tripsToDisplay) => {
-        console.log("mapping trips to display")
         return tripsToDisplay?.map((trip) => {
-            console.log(trip)
                 return (
-                <SafeAreaView key={trip.id}>
+                <SafeAreaView   key={trip.id}>
                     <TripListItem trip={trip} navigation={navigation}/>
                 </SafeAreaView>)
             })
@@ -73,24 +69,29 @@ const TripList = ({navigation}) =>{
 
     return(
     <SafeAreaView>
+        <View style={styles.navigate}>
+        <Pressable style={styles.addTrip} onPress={()=>navigation.goBack()}>
+            <Text style={[styles.addTripText, { textAlign: 'center' }]}>Back</Text>
+        </Pressable>
         <Pressable style={styles.addTrip} onPress={()=>navigation.navigate('addTrips')}>
             <Text style={[styles.addTripText, { textAlign: 'center' }]}>Add Trip</Text>
         </Pressable>
+        </View>
         {currentTrip && futureTrips &&  pastTrips && <Text>Loading...</Text>} 
         {/* check below if equals null  */}
         {!currentTrip && !futureTrips &&  !pastTrips && <Text>You have no trips please add trip to display</Text>} 
         {currentTrip && (<>
-            <Text style={styles.}>Current Trip</Text>
+            <Text style={[styles.tripHeadings, { fontWeight: 'bold' }]}>Current Trip</Text>
             {displayTrips([currentTrip])}
             </>
         )}
         {futureTrips.length!=0 && (<>
-            <Text>Future Trips</Text>
+            <Text style={styles.tripHeadings}>Future Trips</Text>
             {displayTrips(futureTrips)}
             </>
         )}
         {pastTrips.length!=0 && (<>
-            <Text>Past Trips</Text>
+            <Text style={styles.tripHeadings}>Past Trips</Text>
             {displayTrips(pastTrips)}
             </>
         )}
@@ -98,18 +99,36 @@ const TripList = ({navigation}) =>{
     }
 
 const styles = StyleSheet.create({
+    navigate: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between'
+    },
     addTrip: {
         alignSelf: 'center',
         marginTop: 2,
-        backgroundColor: '#30DBE2',
-        padding: 8,
+        marginBottom: 5,
+        marginHorizontal: '2%',
+        backgroundColor: '#45A3A3',
+        paddingVertical: 4,
+        paddingHorizontal: 10,
         borderRadius:10,
-        width: 100,
+        width: 'auto',
         shadowOpacity: '0.2%',
         shadowColor: '#775204',
     },
     addTripText: {
         fontFamily: 'Courier New'
     },
+    tripHeadings: {
+        marginTop: 13,
+        marginBottom: 3,
+        marginLeft: '2%',
+        fontFamily: 'Courier New',
+        fontWeight: '600',
+        fontSize: '20',
+        color: '#40IGH23'
+    },
+   
 });
 export default TripList;
