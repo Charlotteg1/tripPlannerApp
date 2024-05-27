@@ -5,8 +5,9 @@ const PackingList = ({tripId, navigation}) =>{
 
     const [allLists, setAllLists] = useState();
     const [newListModalOpen, setNewListModalOpen] = useState(false);
-    const [newListTitle, setNewListTitle] = useState();
+    const [newListTitle, setNewListTitle] = useState('');
     const [newItemsList, setNewItemsList] = useState(['']);
+    const [listId, setListId] = useState();
 
     const handleOpenModal=()=>{
         console.log('true')
@@ -15,6 +16,7 @@ const PackingList = ({tripId, navigation}) =>{
 
     const handleCloseModal=()=>{
         setNewListTitle(null)
+        setNewItemsList([''])
         setNewListModalOpen(false)
     }
 
@@ -39,9 +41,59 @@ const PackingList = ({tripId, navigation}) =>{
     // need option to add to list
     // and create new list
 
-    const handleAddList = () =>{
+    const addNewList = async () => {
+        const temp = {
+            "listName" : newListTitle
+        }
+        const url = `http://localhost:8080/packingLists/${tripId}`
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(temp),
+        });
+        if (response.status === 201) {
+            const data = await response.json();
+            await setAllLists(data)
+            setNewListTitle('');
+            setListId(allLists[allLists.length - 1].id)
+        } else {
+            console.error('Failed to add list', response.status, response.statusText);
+        }
 
-        fetchPackingLists()
+    }
+
+    const addListItem = async (itemName) => {
+        const temp = {
+            "itemName" : itemName
+        }
+        const url = `http://localhost:8080/packingLists/addItem/${listId}`
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(temp),
+        });
+        if (response.status === 201) {
+            const data = await response.json();
+            setAllLists(data)
+        } else {
+            console.error('Failed to add list', response.status, response.statusText);
+        }
+
+    }
+
+    const handleAddList = async () =>{
+        // call post method for creating new list
+        // in for loop call post for adding each item to list, eventually add to / change back end so can allow a bulk list
+        await addNewList()
+        // for (const itemName of newItemsList) {
+        //     await addListItem(itemName)
+        // }
+        setListId(null)
+        setNewItemsList([''])
         handleCloseModal()
     }
 
@@ -92,7 +144,7 @@ const PackingList = ({tripId, navigation}) =>{
                             <TextInput
                                 key={index}
                                 style={styles.inputItem}
-                                placeholder={`Input Item`}
+                                placeholder={`Input Item (optional)`}
                                 value={item}
                                 onChangeText={(value) => handleItemChange(index, value)}
                             />
