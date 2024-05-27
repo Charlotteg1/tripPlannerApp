@@ -126,8 +126,8 @@ const styles = StyleSheet.create({
         marginLeft: '2%',
         fontFamily: 'Courier New',
         fontWeight: '600',
-        fontSize: '20',
-        color: '#40IGH23'
+        fontSize: 20,
+        color: '#403423'
     },
    
 });

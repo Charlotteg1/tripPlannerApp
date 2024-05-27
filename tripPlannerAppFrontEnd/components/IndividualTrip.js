@@ -1,22 +1,47 @@
-import { SafeAreaView, Text, Pressable, StyleSheet } from "react-native";
+import { SafeAreaView, Text, Pressable, StyleSheet, View } from "react-native";
+import { useRoute } from '@react-navigation/native';
+import EachDay from "./EachDay";
 
-const IndividualTrip = ({viewTrip, numOfDays, navigation}) => {
+const IndividualTrip = ({navigation}) => {
+
+    const route = useRoute();
+    const { trip, numOfDays } = route.params;
+
+
+    const displayEachDay = () => {
+        const days = trip.days;
+        return days?.map((day, i) => {
+                return (
+                <SafeAreaView key={day.id}>
+                    <EachDay  day={day} navigation={navigation}/>
+                </SafeAreaView>)
+            })
+    }
 
     return (
     <SafeAreaView>
-        <Pressable style={styles.packingListButton} onPress={(()=>navigation.navigate('packingLists'), { tripId : trip.id, navigation:navigation})}>
+        <Pressable style={styles.backButton} onPress={()=>navigation.goBack()}>
+            <Text style={[styles.backText, { textAlign: 'center' }]}>Back</Text>
+        </Pressable>
+        <Pressable style={styles.packingListButton} onPress={()=>navigation.navigate('packingLists', { tripId : trip.id, navigation:navigation})}>
             <Text style={[styles.packingListText, { textAlign: 'center' }]}>View Packing List</Text>
         </Pressable>
-        <Text style={styles.destination}>{viewTrip.destination}</Text>
-        <Text style={styles.dates}>{viewTrip.tripStartDate} - {viewTrip.tripEndDate}</Text>
-        <Text style={styles.tripLength}>{numOfDays} days</Text>
-        <Text style={styles.climate}>climate : {viewTrip.climate}</Text>
+        <Text style={styles.tripOverviewHeading}>Trip Overview</Text>
+        <View style={styles.overviewBox}>
+            <Text style={styles.destination}>{trip.destination}</Text>
+            <Text style={styles.dates}>{trip.tripStartDate} - {trip.tripEndDate}</Text>
+            <Text style={styles.tripLength}>{numOfDays} days</Text>
+            <Text style={styles.climate}>climate : {trip.climate}</Text>
+        </View>
         {/* Day by day */}
+        <Text style={styles.dayHeading}> Individual Day</Text>
+        {displayEachDay()}
     </SafeAreaView>)
 }
 const styles = StyleSheet.create({
-    tripBox: {
-        backgroundColor: 'light grey',
+    overviewBox: {
+        backgroundColor: 'beige',
+        borderBlockColor: 'black',
         borderRadius:10,
         borderColor: 'navy',
         padding:10,
