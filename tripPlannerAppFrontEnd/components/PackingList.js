@@ -1,10 +1,12 @@
-import { SafeAreaView, Pressable, Text, StyleSheet, Modal, View} from "react-native";
+import { SafeAreaView, Pressable, Text, StyleSheet, Modal, View, TextInput} from "react-native";
 import { useState } from "react";
 
 const PackingList = ({tripId, navigation}) =>{
 
-    const {allLists, setAllLists} =useState();
+    const [allLists, setAllLists] = useState();
     const [newListModalOpen, setNewListModalOpen] = useState(false);
+    const [newListTitle, setNewListTitle] = useState();
+    const [newItemsList, setNewItemsList] = useState(['']);
 
     const handleOpenModal=()=>{
         console.log('true')
@@ -12,6 +14,7 @@ const PackingList = ({tripId, navigation}) =>{
     }
 
     const handleCloseModal=()=>{
+        setNewListTitle(null)
         setNewListModalOpen(false)
     }
 
@@ -35,6 +38,21 @@ const PackingList = ({tripId, navigation}) =>{
     // note each item has an indicator (packed or unpacked)
     // need option to add to list
     // and create new list
+
+    const handleAddList = () =>{
+
+        fetchPackingLists()
+        handleCloseModal()
+    }
+
+    const handleItemChange = (index, value) => {
+        const updatedItems = newItemsList.map((item, i) => (i === index ? value : item));
+        setNewItemsList(updatedItems);
+
+        if (index === newItemsList.length - 1 && value !== '') {
+            setNewItemsList([...updatedItems, '']);
+        }
+    };
 
     return(
     <SafeAreaView>
@@ -64,10 +82,23 @@ const PackingList = ({tripId, navigation}) =>{
                         <Pressable style={styles.closeButton} onPress={()=> handleCloseModal()}>
                             <Text style={styles.closeButtonText} >Close</Text>
                         </Pressable>
-                        <Text style={styles.modalText}>List Name</Text>
-                        <Text> </Text>
-                        <Pressable style={styles.addButton} onPress={handleCloseModal}>
-                            <Text style={styles.addButtonText}>Close</Text>
+                        <TextInput
+                            style={styles.inputTitle}
+                            placeholder="Enter List Name"
+                            value={newListTitle}
+                            onChangeText={(e)=> setNewListTitle(e)}
+                        />
+                        {newListTitle && (newItemsList.map((item, index) => (
+                            <TextInput
+                                key={index}
+                                style={styles.inputItem}
+                                placeholder={`Input Item`}
+                                value={item}
+                                onChangeText={(value) => handleItemChange(index, value)}
+                            />
+                        )))}
+                        <Pressable style={styles.addButton} onPress={()=>  handleAddList()}>
+                            <Text style={styles.addButtonText}>Add List</Text>
                         </Pressable>
                     </View>
                 </View>
@@ -111,12 +142,12 @@ const styles = StyleSheet.create({
     closeButtonText:{
 
     },
-    button: {
+    addButton: {
         backgroundColor: 'beige',
         padding: 10,
         borderRadius: 5,
     },
-    buttonText: {
+    addButtonText: {
         color: 'navy',
         fontWeight: '500',
         textAlign: 'center',
@@ -129,6 +160,7 @@ const styles = StyleSheet.create({
     },
     modalContainer: {
         width: '70%',
+        height: '30%',
         padding: 10,
         backgroundColor: '#fff',
         borderRadius: 10,
@@ -139,9 +171,11 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
     },
-    modalText: {
-        marginBottom: 15,
-        textAlign: 'center',
+    inputTitle:{
+        fontWeight:"600",
+    },
+    inputItem: {
+
     },
    
 });
