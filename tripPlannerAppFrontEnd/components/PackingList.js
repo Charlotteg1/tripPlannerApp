@@ -1,16 +1,16 @@
 import { SafeAreaView, Pressable, Text, StyleSheet, Modal, View, TextInput} from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import IndividualPackingList from "./IndividualPackingList";
 
-const PackingList = ({tripId, navigation}) =>{
+const PackingList = ({route, navigation}) =>{
 
+    const { tripId } = route.params;
     const [allLists, setAllLists] = useState();
     const [newListModalOpen, setNewListModalOpen] = useState(false);
     const [newListTitle, setNewListTitle] = useState('');
     const [newItemsList, setNewItemsList] = useState(['']);
-    const [listId, setListId] = useState();
 
     const handleOpenModal=()=>{
-        console.log('true')
         setNewListModalOpen(true)
     }
 
@@ -28,13 +28,17 @@ const PackingList = ({tripId, navigation}) =>{
         const response = await fetch(url);
         const data = await response.json();
 
-        if(response.status === 302){
+        if(response.status === 201){
             setAllLists(data);
             return true;
         }else{
             return false;
         }
     }
+
+    useEffect(()=>{
+        fetchPackingLists();
+      },[]);
     
     // iterate through each list and display Title and items 
     // note each item has an indicator (packed or unpacked)
@@ -55,16 +59,15 @@ const PackingList = ({tripId, navigation}) =>{
         });
         if (response.status === 201) {
             const data = await response.json();
-            await setAllLists(data)
+            setAllLists(data)
             setNewListTitle('');
-            setListId(allLists[allLists.length - 1].id)
         } else {
             console.error('Failed to add list', response.status, response.statusText);
         }
 
     }
 
-    const addListItem = async (itemName) => {
+    const addListItem = async (itemName, listId) => {
         const temp = {
             "itemName" : itemName
         }
@@ -89,10 +92,15 @@ const PackingList = ({tripId, navigation}) =>{
         // call post method for creating new list
         // in for loop call post for adding each item to list, eventually add to / change back end so can allow a bulk list
         await addNewList()
-        // for (const itemName of newItemsList) {
-        //     await addListItem(itemName)
-        // }
-        setListId(null)
+
+        // this could possibly cause an error, as not technically correct, need to change back end so that list id is returned
+        const listId = allLists[allLists.length].id
+
+        for (const itemName of newItemsList) {
+            if(itemName.length > 0){
+                await addListItem(itemName, listId)
+            }
+        }
         setNewItemsList([''])
         handleCloseModal()
     }
@@ -106,6 +114,20 @@ const PackingList = ({tripId, navigation}) =>{
         }
     };
 
+    const displayEachList = () =>{
+        const renderedLists = [];
+    
+        allLists.forEach((list) => {
+            renderedLists.push(
+                <SafeAreaView key={list.id}>
+                    <IndividualPackingList list={list}/>
+                </SafeAreaView>
+            );
+        });
+    
+        return renderedLists;
+    }
+
     return(
     <SafeAreaView>
         {/* go back to trip page button */}
@@ -115,7 +137,11 @@ const PackingList = ({tripId, navigation}) =>{
             </Text>
         </Pressable>
         {/* add new list */}
-        {!allLists && <Text style={styles.nullListText}>No packing lists to display please add packing list</Text>}
+        {!allLists ? 
+        (<Text style={styles.nullListText}>No packing lists to display please add packing list</Text>)
+        :
+        (displayEachList())
+        }
         <Pressable style={allLists ? styles.createFirstListBox: styles.addListBox} onPress={()=> handleOpenModal()}>
             <Text style={allLists ? styles.createFirstListText: styles.addListText}>
                 + add new list

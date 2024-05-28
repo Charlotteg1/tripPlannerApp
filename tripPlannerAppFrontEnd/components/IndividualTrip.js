@@ -9,6 +9,7 @@ const IndividualTrip = ({navigation}) => {
 
 
     const displayEachDay = () => {
+        console.log(trip.id)
         const days = trip.days;
         return days?.map((day, i) => {
                 return (
