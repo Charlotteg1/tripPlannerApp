@@ -1,6 +1,7 @@
 import { SafeAreaView, Pressable, Text, StyleSheet, Modal, View, TextInput} from "react-native";
 import { useState, useEffect } from "react";
 import IndividualPackingList from "./IndividualPackingList";
+import Swipeout from "react-native-swipeout";
 
 const PackingList = ({route, navigation}) =>{
 
@@ -116,7 +117,7 @@ const PackingList = ({route, navigation}) =>{
 
     const displayEachList = () =>{
         const renderedLists = [];
-    
+     
         allLists.forEach((list) => {
             renderedLists.push(
                 <SafeAreaView key={list.id}>
@@ -142,6 +143,7 @@ const PackingList = ({route, navigation}) =>{
         :
         (displayEachList())
         }
+        
         <Pressable style={allLists ? styles.createFirstListBox: styles.addListBox} onPress={()=> handleOpenModal()}>
             <Text style={allLists ? styles.createFirstListText: styles.addListText}>
                 + add new list

@@ -1,37 +1,42 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, SafeAreaView} from "react-native";
+import Swipeout from "react-native-swipeout";
 
 const IndividualPackingList = ({list}) => {
 
-    // const [listItems, setListItems] = useState()
+    const handleDelete = () =>{
+        console.log(true)
+    }
 
-    // const fetchListItems = async () => {
-    //     const url = `http://localhost:8080/packingLists/itemsInList/${list.id}`;
-    //     const response = await fetch(url);
-    //     const data = await response.json();
-
-    //     if(response.status === 302){
-    //         setListItems(data);
-    //         console.log(data)
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-    // }
-
-    // useEffect(()=>{
-    //     fetchListItems();
-    //   },[]);
+    const handlePacked  = () => {
+        // call method 
+    }
 
     const displayItems = () =>{
         const listItems = list.items
         const allItems = [];
+        const swipeoutButtonRight = [
+            {
+                text: 'Delete',
+                backgroundColor: 'red',
+                onPress: () => handleDelete(),
+            }
+        ];
+        const swipeoutButtonLeft = [
+            {
+                text: 'packed',
+                backgroundColor: 'navy',
+                onPress: () => handlePacked(),
+            }
+        ];
     
         listItems.forEach((item) => {
             allItems.push(
-                <SafeAreaView key={item.id}>
-                    <Text style={styles.item}>{item.itemName}</Text>
-                </SafeAreaView>
+                <Swipeout key={list.id} right={swipeoutButtonRight} left={swipeoutButtonLeft} autoClose={true} style={styles.swipe}>
+                    <SafeAreaView key={item.id}>
+                        <Text style={styles.item}>{item.itemName}</Text>
+                    </SafeAreaView>
+                </Swipeout>
             );
         });
         return allItems;
