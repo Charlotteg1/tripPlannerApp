@@ -30,7 +30,7 @@ public class DayService {
         LocalDate startDate = trip.getTripStartDate();
         LocalDate endDate = trip.getTripEndDate();
 
-        for(LocalDate date = startDate; !date.isAfter(endDate) ; date = date.plusDays(1)){
+        for(LocalDate date = startDate; !date.isAfter(endDate.plusDays(1)) ; date = date.plusDays(1)){
             Day newDay = new Day(trip,trip.getDestination(),date,null);
             dayRepository.save(newDay);
         }
