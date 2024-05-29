@@ -38,10 +38,10 @@ const TripList = ({navigation}) =>{
                 const tripStartDate = new Date(trip.tripStartDate);
                 const tripEndDate = new Date(trip.tripEndDate);
 
-                if (tripStartDate < currentDate){
-                    futureTripsArray.push(trip);
-                }else if (tripEndDate > currentDate){
+                if (tripEndDate < currentDate){
                     pastTripsArray.push(trip);
+                }else if (tripStartDate > currentDate){
+                    futureTripsArray.push(trip);
                 }else{
                     currentTripHolder = trip
                 }
@@ -77,9 +77,8 @@ const TripList = ({navigation}) =>{
             <Text style={[styles.addTripText, { textAlign: 'center' }]}>Add Trip</Text>
         </Pressable>
         </View>
-        {currentTrip && futureTrips &&  pastTrips && <Text>Loading...</Text>} 
         {/* check below if equals null  */}
-        {!currentTrip && !futureTrips &&  !pastTrips && <Text>You have no trips please add trip to display</Text>} 
+        {!currentTrip && !futureTrips &&  !pastTrips && <Text style={styles.noTripText}>You have no trips please add trip to display</Text>} 
         {currentTrip && (<>
             <Text style={[styles.tripHeadings, { fontWeight: 'bold' }]}>Current Trip</Text>
             {displayTrips([currentTrip])}
@@ -129,6 +128,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#403423'
     },
+    noTripText: {
+        alignSelf: 'center',
+        fontFamily: 'Courier New'
+    }
    
 });
 export default TripList;

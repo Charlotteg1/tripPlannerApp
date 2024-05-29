@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { StyleSheet, Text, SafeAreaView} from "react-native";
 import Swipeout from "react-native-swipeout";
 

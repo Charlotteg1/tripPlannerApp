@@ -41,7 +41,7 @@ const IndividualTrip = ({navigation}) => {
 }
 const styles = StyleSheet.create({
     overviewBox: {
-        backgroundColor: 'beige',
+        backgroundColor: '#6A7062',
         borderBlockColor: 'black',
         borderRadius:10,
         borderColor: 'navy',
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         margin: 5,
     },
     destination: {
-        color: '#80D34E',
+        color: '#AAADC4',
         margin: 2,
     },
     dates: {
