@@ -17,9 +17,11 @@ const Login = ({navigation}) => {
                     "email" : email,
                     "password" : password
                 }
-                // const authorised = await authenticateUser(loginDetails)
+                // const authorised = await authenticateUser(loginDetails)  (temp removed for development ease)
                 const authorised = true;
                 if(authorised){
+                    setEmail()
+                    setPassword()
                     navigation.navigate('trips');
                 }else{
                     setError("email or password does not match")
@@ -65,7 +67,6 @@ const Login = ({navigation}) => {
         <Pressable style={styles.submit} onPress={checkLogin}>
             <Text style={[styles.text, { textAlign: 'center' }]}>Login</Text>
         </Pressable>
-        {/* <Button style={styles.submit} onPress={checkLogin} title="Login"/> */}
     </View>
     {error && (!email || email.length === 0) && (!password || password.length === 0) && 
     <View style={styles.errorBox}>

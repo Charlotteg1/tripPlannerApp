@@ -33,10 +33,14 @@ const TripList = ({navigation}) =>{
         const pastTripsArray = [];
         let currentTripHolder = null;
         const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);
+        
         if(trips){
             trips.forEach(trip => {
                 const tripStartDate = new Date(trip.tripStartDate);
                 const tripEndDate = new Date(trip.tripEndDate);
+                tripStartDate.setHours(0, 0, 0, 0);
+                tripEndDate.setHours(0, 0, 0, 0);
 
                 if (tripEndDate < currentDate){
                     pastTripsArray.push(trip);
