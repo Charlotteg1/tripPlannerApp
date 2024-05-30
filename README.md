@@ -10,11 +10,16 @@ Trip Planner App using React Native. The app allows user to plan trips (eg packi
   <summary>Current Login Screen</summary>
   <img width="200" alt="Screenshot 2024-04-25 at 13 21 32" src="https://github.com/Charlotteg1/tripPlannerApp/assets/131787016/0f00f2f3-c1de-4767-b247-d3c61c363469">
 </details>
+<details>
+  <summary>Current Add Trip Screen</summary>
+  <img width="200" alt="Screenshot 2024-05-30 at 01 40 00" src="https://github.com/Charlotteg1/tripPlannerApp/assets/131787016/a5d46fb6-6c09-421e-969e-079c0ffdda53">
+</details>
 <H2>Wireframe for each screen</H2>
 <details>
   <summary>Trip List Screen</summary>
   <img width="917" alt="Screenshot 2024-05-28 at 02 13 49" src="https://github.com/Charlotteg1/tripPlannerApp/assets/131787016/7595a19e-dad4-470d-b709-be09212c55ab">
 </details>
+
 <details>
   <summary>Packing List Screen</summary>
   <img width="896" alt="Screenshot 2024-05-28 at 02 27 33" src="https://github.com/Charlotteg1/tripPlannerApp/assets/131787016/26011d55-6e2e-4284-9532-7490b5c9f607">
