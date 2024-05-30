@@ -1,12 +1,15 @@
 import { Text, SafeAreaView, TextInput, Button, StyleSheet, Pressable, View } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import Calendar from 'react-native-calendar-datepicker';
+import { useRoute } from '@react-navigation/native';
 import Moment from 'moment';
 import RNPickerSelect from 'react-native-picker-select';
 
 
 
 const AddTrip = ({navigation}) => {
+    const route = useRoute();
+    const { fetchTrips } = route.params;
     const [destinationName, setDestinationName] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
@@ -29,13 +32,42 @@ const AddTrip = ({navigation}) => {
         setEndDate(date)
     }
 
-    const handleAddTrip = () => {
+    const handleAddTrip = async () => {
         // check no null values, if so display error (highlight entry with error in future)
+        if(destinationName && climateChoice && startDate && endDate){
+            await addNewTrip()
+            fetchTrips()
+            navigation.navigate('trips')
+            
+        }
         // make the entries into json format and send to backend (POST request)
         // display pop up to confirm (in future)
         // naviagate back to trips page
-        navigation.navigate('trips')
+
     }
+
+    const addNewTrip = async () => {
+        temp={
+            "userId": 2,
+            "destination" : destinationName,
+            "tripStartDate": startDate,
+            "tripEndDate": endDate,
+            "climate": climateChoice
+
+        }
+        const url = `http://localhost:8080/trip/addTrip`;
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(temp)
+        });
+        console.log(response)
+        if (response.status === 201) {
+            return true;
+        } else {
+            return false;
+        }
+      };
 
 
     return(
@@ -133,16 +165,19 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     destinationText: { 
+        color: '#26262C',
         fontSize: 24,
         fontFamily: 'Courier New',
         marginLeft: 8,
     },
     destinationInput: {
         flex: 1,
-        fontSize: 20,
-        borderRadius: 1,
+        fontSize: 23,
+        borderRadius: 3,
+        paddingLeft: 4,
         borderColor: '#CCD0C8',
-        borderWidth: 3,
+        borderWidth: 2,
+        fontFamily: 'Courier New',
     },
 
     climateSection:{

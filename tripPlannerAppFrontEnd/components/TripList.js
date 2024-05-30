@@ -34,7 +34,7 @@ const TripList = ({navigation}) =>{
         let currentTripHolder = null;
         const currentDate = new Date();
         currentDate.setHours(0, 0, 0, 0);
-        
+
         if(trips){
             trips.forEach(trip => {
                 const tripStartDate = new Date(trip.tripStartDate);
@@ -77,7 +77,7 @@ const TripList = ({navigation}) =>{
         <Pressable style={styles.addTrip} onPress={()=>navigation.goBack()}>
             <Text style={[styles.addTripText, { textAlign: 'center' }]}>Back</Text>
         </Pressable>
-        <Pressable style={styles.addTrip} onPress={()=>navigation.navigate('addTrips')}>
+        <Pressable style={styles.addTrip} onPress={()=>navigation.navigate('addTrips' , {fetchTrips: fetchTrips})}>
             <Text style={[styles.addTripText, { textAlign: 'center' }]}>Add Trip</Text>
         </Pressable>
         </View>
