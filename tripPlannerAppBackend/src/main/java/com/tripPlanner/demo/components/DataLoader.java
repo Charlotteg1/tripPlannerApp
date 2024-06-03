@@ -36,7 +36,7 @@ public class DataLoader implements ApplicationRunner {
         User user2 = new User("Kai","Gem", "kairileyg@hotmail.com", "Ketchup353");
         userRepository.save(user2);
 
-        Trip trip1 = new Trip(user2, "New York City", LocalDate.of(2024, 5, 23), LocalDate.of(2024,5,29), Climate.Mild);
+        Trip trip1 = new Trip(user2, "New York City", LocalDate.of(2024, 5, 23), LocalDate.of(2024,5,30), Climate.Mild);
         tripRepository.save(trip1);
         dayService.generateDaysForTrip(trip1);
 
