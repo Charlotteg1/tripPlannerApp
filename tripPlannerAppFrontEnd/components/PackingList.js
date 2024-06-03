@@ -10,6 +10,7 @@ const PackingList = ({route, navigation}) =>{
     const [newListModalOpen, setNewListModalOpen] = useState(false);
     const [newListTitle, setNewListTitle] = useState('');
     const [newItemsList, setNewItemsList] = useState(['']);
+    const [newItem, setNewItem] = useState('');
 
     const handleOpenModal=()=>{
         setNewListModalOpen(true)
@@ -125,7 +126,12 @@ const PackingList = ({route, navigation}) =>{
                 </SafeAreaView>
             );
         });
-    
+
+        renderedLists.push(
+            <SafeAreaView>
+                    <TextInput placeholder={"enter new item"} value={newItem} onChangeText={(text)=>setNewItem(text)} />
+            </SafeAreaView>
+        )
         return renderedLists;
     }
 

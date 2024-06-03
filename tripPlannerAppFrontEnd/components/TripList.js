@@ -62,6 +62,11 @@ const TripList = ({navigation}) =>{
     }, [trips]);
 
     const displayTrips = (tripsToDisplay) => {
+        if(tripsToDisplay.length >1 ){
+            tripsToDisplay.sort((a, b) => new Date(a.tripEndDate) - new Date(b.tripEndDate));
+            console.log(tripsToDisplay)
+        }
+        
         return tripsToDisplay?.map((trip) => {
                 return (
                 <SafeAreaView   key={trip.id}>
