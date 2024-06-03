@@ -10,7 +10,9 @@ Trip Planner App using React Native. The app allows user to plan trips (eg packi
   <summary>Models and DTOs</summary>
   <img width="514" alt="Screenshot 2024-06-03 at 17 41 53" src="https://github.com/Charlotteg1/tripPlannerApp/assets/131787016/309fed1f-2da6-41f7-8708-711d38c5c40f">
 </details>
+
 Link to Trello board, used to plan and track project(https://trello.com/b/sE7XYyHq/trip-planner-app-project)
+
 <H2>Sample screenshots of app</H2>
 <details>
   <summary>Current Login Screen</summary>
@@ -20,6 +22,11 @@ Link to Trello board, used to plan and track project(https://trello.com/b/sE7XYy
   <summary>Current Add Trip Screen</summary>
   <img width="200" alt="Screenshot 2024-05-30 at 01 40 00" src="https://github.com/Charlotteg1/tripPlannerApp/assets/131787016/a5d46fb6-6c09-421e-969e-079c0ffdda53">
 </details>
+<details>
+  <summary>Current Trip List Screen</summary>
+  <img width="200" alt="Screenshot 2024-06-03 at 17 45 25" src="https://github.com/Charlotteg1/tripPlannerApp/assets/131787016/fd873754-d57f-4408-83f9-97753016a615">
+</details>
+
 <H2>Wireframe for each screen</H2>
 <details>
   <summary>Trip List Screen</summary>
