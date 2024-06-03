@@ -11,6 +11,7 @@ const IndividualTrip = ({navigation}) => {
     const displayEachDay = () => {
         console.log(trip.id)
         const days = trip.days;
+        days.sort((a,b)=> new Date(a.date)-  new Date(b.date))
         return days?.map((day, i) => {
                 return (
                 <SafeAreaView key={day.id}>
