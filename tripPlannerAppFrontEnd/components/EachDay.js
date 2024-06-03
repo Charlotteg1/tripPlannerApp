@@ -1,11 +1,15 @@
 import { SafeAreaView, Text, StyleSheet, View } from "react-native"
 
-const EachDay = ({day, navigation}) => {
+const EachDay = ({day, dayNumber, navigation}) => {
+    
+    const displayDate = () => {
+        // display day and month 
+    }
 
     return (
         <SafeAreaView>
             <View style={styles.dayBox}>
-                <Text>Day {day.id}</Text>
+                <Text>Day {dayNumber +1 }</Text>
                 {day.accomodation && <Text>{day.accomodation.name}</Text> }
                 <Text>Date {day.date}</Text>
             </View>

@@ -15,7 +15,7 @@ const IndividualTrip = ({navigation}) => {
         return days?.map((day, i) => {
                 return (
                 <SafeAreaView key={day.id}>
-                    <EachDay  day={day} navigation={navigation}/>
+                    <EachDay  day={day} dayNumber={i} navigation={navigation}/>
                 </SafeAreaView>)
             })
     }

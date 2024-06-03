@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { TextInput, SafeAreaView, Text, StyleSheet, View, Pressable } from "react-native";
+import { UserContext } from "../containers/appContainer";
 
 const Login = ({navigation}) => {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [error,setError] = useState();
+    const {setCurrentUser} = useContext(UserContext);
 
     const checkLogin = async () => {
         if(!password && !email){
@@ -17,8 +19,7 @@ const Login = ({navigation}) => {
                     "email" : email,
                     "password" : password
                 }
-                // const authorised = await authenticateUser(loginDetails)  (temp removed for development ease)
-                const authorised = true;
+                const authorised = await authenticateUser(loginDetails) 
                 if(authorised){
                     setEmail()
                     setPassword()
@@ -48,9 +49,12 @@ const Login = ({navigation}) => {
           body: JSON.stringify(loginDetails)
         });
         if (response.status === 200) {
-          return true;
+            const user = await response.json();
+            console.log(user)
+            setCurrentUser(user)
+            return true;
         } else {
-          return false;
+            return false;
         }
       };
 
@@ -71,9 +75,11 @@ const Login = ({navigation}) => {
     {error && (!email || email.length === 0) && (!password || password.length === 0) && 
     <View style={styles.errorBox}>
      <Text style={styles.error}>Error : {error}</Text>
-    </View>
-    // create new account option below
-    }
+    </View>}
+    <Pressable style={styles.newAccountButton} >
+        <Text style={styles.newAccountText}>Create New account</Text>
+    </Pressable>
+    
     </SafeAreaView>)
 }
 
@@ -153,6 +159,12 @@ const styles = StyleSheet.create({
         fontFamily: 'Courier New',
         color: '#3D4652',
         fontWeight: 'bold',
+    },
+    newAccountButton: {
+
+    },
+    newAccountText: {
+
     },
 
   });

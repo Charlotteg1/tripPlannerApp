@@ -61,7 +61,8 @@ const PackingList = ({route, navigation}) =>{
         });
         if (response.status === 201) {
             const data = await response.json();
-            setAllLists(data)
+            // setAllLists(data)
+            await fetchPackingLists()
             setNewListTitle('');
         } else {
             console.error('Failed to add list', response.status, response.statusText);
@@ -118,7 +119,7 @@ const PackingList = ({route, navigation}) =>{
 
     const displayEachList = () =>{
         const renderedLists = [];
-     
+        console.log(allLists)
         allLists.forEach((list) => {
             renderedLists.push(
                 <SafeAreaView key={list.id}>
@@ -129,7 +130,12 @@ const PackingList = ({route, navigation}) =>{
 
         renderedLists.push(
             <SafeAreaView>
-                    <TextInput placeholder={"enter new item"} value={newItem} onChangeText={(text)=>setNewItem(text)} />
+                    <TextInput styles={styles.newItemInput} placeholder={"enter new item"} value={newItem} onChangeText={(text)=>setNewItem(text)}/>
+                    {newItem && 
+                    <Pressable styles={styles.newItemButton}>
+                        <Text styles={styles.newItemButtonText}>Enter</Text>
+                    </Pressable>
+                    }
             </SafeAreaView>
         )
         return renderedLists;
@@ -183,9 +189,9 @@ const PackingList = ({route, navigation}) =>{
                                 onChangeText={(value) => handleItemChange(index, value)}
                             />
                         )))}
-                        <Pressable style={styles.addButton} onPress={()=>  handleAddList()}>
+                        {newListTitle && <Pressable style={styles.addButton} onPress={()=>  handleAddList()}>
                             <Text style={styles.addButtonText}>Add List</Text>
-                        </Pressable>
+                        </Pressable>}
                     </View>
                 </View>
             </Modal>
@@ -263,6 +269,17 @@ const styles = StyleSheet.create({
     inputItem: {
 
     },
+    newItemInput: {
+
+    },
+    newItemButton: {
+
+    },
+    newItemButtonText: {
+
+    },
+
+
    
 });
 export default PackingList;

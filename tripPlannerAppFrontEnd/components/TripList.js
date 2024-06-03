@@ -1,6 +1,7 @@
 import { SafeAreaView , View,  Text, Pressable, StyleSheet} from "react-native";
-import { useState, useEffect} from "react";
+import { useState, useEffect, useContext} from "react";
 import TripListItem from './TripListItem';
+import { UserContext } from "../containers/appContainer";
 
 const TripList = ({navigation}) =>{
 
@@ -8,10 +9,10 @@ const TripList = ({navigation}) =>{
     const [currentTrip, setCurrentTrip] = useState()
     const [futureTrips, setFutureTrips] = useState([])
     const [pastTrips, setPastTrips] = useState([])
-    const [currentUser, setCurrentUser] = useState(2);
+    const {currentUser} = useContext(UserContext);
 
     const fetchTrips = async () => {
-        const url = `http://localhost:8080/trip/user/${currentUser}`;
+        const url = `http://localhost:8080/trip/user/${currentUser.id}`;
         const response = await fetch(url);
         const data = await response.json();
 
@@ -75,6 +76,8 @@ const TripList = ({navigation}) =>{
             })
     }
 
+    console.log(currentUser)
+
 
     return(
     <SafeAreaView>
@@ -82,11 +85,16 @@ const TripList = ({navigation}) =>{
         <Pressable style={styles.addTrip} onPress={()=>navigation.goBack()}>
             <Text style={[styles.addTripText, { textAlign: 'center' }]}>Back</Text>
         </Pressable>
-        <Pressable style={styles.addTrip} onPress={()=>navigation.navigate('addTrips' , {fetchTrips: fetchTrips})}>
+        {!currentUser ? 
+        (<Text></Text>) : 
+        (<Pressable style={styles.addTrip} onPress={()=>navigation.navigate('addTrips' , {fetchTrips: fetchTrips})}>
             <Text style={[styles.addTripText, { textAlign: 'center' }]}>Add Trip</Text>
-        </Pressable>
+        </Pressable>)}
         </View>
         {/* check below if equals null  */}
+        {!currentUser ? 
+        (<Text>Loading</Text>) : 
+        (<>
         {!currentTrip && !futureTrips &&  !pastTrips && <Text style={styles.noTripText}>You have no trips please add trip to display</Text>} 
         {currentTrip && (<>
             <Text style={[styles.tripHeadings, { fontWeight: 'bold' }]}>Current Trip</Text>
@@ -103,6 +111,7 @@ const TripList = ({navigation}) =>{
             {displayTrips(pastTrips)}
             </>
         )}
+        </>)}
     </SafeAreaView>)
     }
 
