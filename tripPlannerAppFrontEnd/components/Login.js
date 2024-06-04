@@ -1,12 +1,11 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { TextInput, SafeAreaView, Text, StyleSheet, View, Pressable } from "react-native";
-import { UserContext } from "../containers/appContainer";
 
 const Login = ({navigation}) => {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [error,setError] = useState();
-    const {setCurrentUser} = useContext(UserContext);
+    const [currentUser, setCurrentUser] = useState();
 
     const checkLogin = async () => {
         if(!password && !email){
@@ -23,7 +22,7 @@ const Login = ({navigation}) => {
                 if(authorised){
                     setEmail()
                     setPassword()
-                    navigation.navigate('trips');
+                    navigation.navigate('trips', {currentUser: currentUser});
                 }else{
                     setError("email or password does not match")
                     setEmail()

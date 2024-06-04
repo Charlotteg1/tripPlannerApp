@@ -5,20 +5,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AddTrip from "../components/AddTrip";
 import IndividualTrip from "../components/IndividualTrip.js";
 import PackingList from "../components/PackingList";
-import { createContext } from "react";
-import { useState } from "react";
 const Stack = createNativeStackNavigator();
-export const Context = createContext(null);
 
 const AppContainer = () => {
-    const [currentUser, setCurrentUser] = useState(null);
-
-    const contextValue={currentUser,setCurrentUser}
-
-
     
     return(
-        <Context.Provider value={contextValue}>
             <NavigationContainer>
                 <Stack.Navigator>
                         <Stack.Screen name="login" component={Login} options={{
@@ -38,7 +29,6 @@ const AppContainer = () => {
                         }}/>
                 </Stack.Navigator>
             </NavigationContainer>
-        </Context.Provider>
     )
 }
 export default AppContainer;

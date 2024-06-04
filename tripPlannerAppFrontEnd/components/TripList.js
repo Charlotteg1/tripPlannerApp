@@ -1,15 +1,13 @@
 import { SafeAreaView , View,  Text, Pressable, StyleSheet} from "react-native";
-import { useState, useEffect, useContext} from "react";
+import { useState, useEffect, useRoute} from "react";
 import TripListItem from './TripListItem';
-import { UserContext } from "../containers/appContainer";
 
-const TripList = ({navigation}) =>{
-
+const TripList = ({route, navigation}) =>{
+    const {currentUser} = route.params;
     const [trips, setTrips] = useState()
     const [currentTrip, setCurrentTrip] = useState()
     const [futureTrips, setFutureTrips] = useState([])
     const [pastTrips, setPastTrips] = useState([])
-    const {currentUser} = useContext(UserContext);
 
     const fetchTrips = async () => {
         const url = `http://localhost:8080/trip/user/${currentUser.id}`;
@@ -75,8 +73,6 @@ const TripList = ({navigation}) =>{
                 </SafeAreaView>)
             })
     }
-
-    console.log(currentUser)
 
 
     return(
