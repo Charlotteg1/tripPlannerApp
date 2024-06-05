@@ -77,7 +77,7 @@ public class UserServiceTest {
         User responseIncorrectEmail = userService.checkLoginCredentials("clairer@hotmail.com", "Apples123");
         assertThat(responseIncorrectEmail).isNull();
 
-//        failing 
+//        failing
         User responseCorrectLogin = userService.checkLoginCredentials("clairer@gmail.com", "Apples23");
         assertThat(responseCorrectLogin).isNotNull();
         assertThat(responseCorrectLogin.getEmail()).isEqualTo("clairer@gmail.com");
