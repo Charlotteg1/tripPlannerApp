@@ -5,13 +5,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AddTrip from "../components/AddTrip";
 import IndividualTrip from "../components/IndividualTrip.js";
 import PackingList from "../components/PackingList";
+import Signup from "../components/Signup";
 const Stack = createNativeStackNavigator();
 
 const AppContainer = () => {
     
     return(
             <NavigationContainer>
-                <Stack.Navigator>
+                <Stack.Navigator >
                         <Stack.Screen name="login" component={Login} options={{
                             headerShown: false
                         } } />
@@ -25,6 +26,9 @@ const AppContainer = () => {
                             headerShown: false
                         }}/>
                         <Stack.Screen name="packingLists" component={PackingList} options={{
+                            headerShown: false
+                        }}/>
+                        <Stack.Screen name="createAccount" component={Signup} options={{
                             headerShown: false
                         }}/>
                 </Stack.Navigator>

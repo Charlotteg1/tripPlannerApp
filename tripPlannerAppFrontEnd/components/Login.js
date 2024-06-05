@@ -8,18 +8,21 @@ const Login = ({navigation}) => {
     const [currentUser, setCurrentUser] = useState();
 
     const checkLogin = async () => {
-        if(!password && !email){
+        if(!password || !email){
             setError("please enter all fields")
+            setEmail()
+            setPassword();
             return;
         }
         if(email.includes('@')){
             if(password && password.length > 7){
                 const loginDetails = {
-                    "email" : email,
+                    "email" : email.toLowerCase(),
                     "password" : password
                 }
                 const authorised = await authenticateUser(loginDetails) 
                 if(authorised){
+                    setError()
                     setEmail()
                     setPassword()
                     navigation.navigate('trips', {currentUser: currentUser});
@@ -57,6 +60,13 @@ const Login = ({navigation}) => {
         }
       };
 
+
+    const handleCreateAccountRequest = () =>{
+        setEmail()
+        setPassword()
+        navigation.navigate("createAccount");
+    }
+
     
     return(
     <SafeAreaView style={styles.loginPage}>
@@ -64,9 +74,9 @@ const Login = ({navigation}) => {
     <Text style={styles.login}> Login</Text>
     <View style={styles.entryBox} >
         <Text style={styles.text}> Email:</Text>
-        <TextInput style={styles.textInput} onChangeText={(text) => { setEmail(text); setError(null); }} value={email}/>
+        <TextInput style={styles.textInput} onChangeText={(text) => { setEmail(text) }} value={email}/>
         <Text style={styles.text}> Password:</Text>
-        <TextInput style={styles.textInput} onChangeText={(text) => { setPassword(text); setError(null); }} value={password}/>
+        <TextInput style={styles.textInput} onChangeText={(text) => { setPassword(text) }} value={password}/>
         <Pressable style={styles.submit} onPress={checkLogin}>
             <Text style={[styles.text, { textAlign: 'center' }]}>Login</Text>
         </Pressable>
@@ -75,7 +85,7 @@ const Login = ({navigation}) => {
     <View style={styles.errorBox}>
      <Text style={styles.error}>Error : {error}</Text>
     </View>}
-    <Pressable style={styles.newAccountButton} >
+    <Pressable style={styles.newAccountButton} onPress={()=> handleCreateAccountRequest()} >
         <Text style={styles.newAccountText}>Create New account</Text>
     </Pressable>
     
@@ -160,10 +170,22 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     newAccountButton: {
+        alignSelf: 'center',
+        backgroundColor: '#E3C16F',
+        padding: 8,
+        borderRadius:10,
+        width: '60%',
+        shadowOpacity: '0.2%',
+        shadowColor: '#775204',
+        position: 'absolute',
+        bottom: '20%',
 
     },
     newAccountText: {
-
+        fontFamily: 'Courier New',
+        color: '#124023',
+        fontSize: 20,
+        textAlign:'center'
     },
 
   });
