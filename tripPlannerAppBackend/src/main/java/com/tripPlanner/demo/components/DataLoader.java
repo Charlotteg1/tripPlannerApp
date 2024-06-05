@@ -31,7 +31,7 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception{
 
-        User user1 = new User("Mia", "Westbrook","mia.westbrook@gmail.com", "mw123");
+        User user1 = new User("Mia", "Westbrook","mia.westbrook@gmail.com", "Roses123");
         userRepository.save(user1);
         User user2 = new User("Kai","Gem", "kairileyg@hotmail.com", "Ketchup353");
         userRepository.save(user2);
