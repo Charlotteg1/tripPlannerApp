@@ -1,3 +1,5 @@
+package services;
+
 import com.tripPlanner.demo.models.User;
 import com.tripPlanner.demo.models.dtos.UserDTO;
 import com.tripPlanner.demo.repostitories.UserRepository;
@@ -14,8 +16,6 @@ import org.mockito.internal.matchers.Any;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.hamcrest.Matchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class UserServiceTest {

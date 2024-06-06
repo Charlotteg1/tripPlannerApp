@@ -1,6 +1,7 @@
+package models;
+
 import com.tripPlanner.demo.models.Trip;
 import com.tripPlanner.demo.models.User;
-import com.tripPlanner.demo.models.dtos.TripDTO;
 import com.tripPlanner.demo.models.enums.Climate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,10 +10,9 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class TripDTOTest {
+public class TripTest {
 
-
-    private TripDTO trip;
+    private Trip trip;
 
     private User user;
 
@@ -20,19 +20,33 @@ public class TripDTOTest {
     public void setUp(){
         user =  new User("Claire", "Roy", "clairer@gmail.com", "Apples23");
         user.setId(1L);
-        trip = new TripDTO(user.getId(), "London", LocalDate.of(2024, 7, 23), LocalDate.of(2024, 7, 28), Climate.Warm);
+        trip = new Trip(user, "London", LocalDate.of(2024, 7, 23), LocalDate.of(2024, 7, 28), Climate.Warm);
     }
 
     @Test
-    void testTripGetUserId() {
-        Long userIdFound = trip.getUserId();
-        assertThat(userIdFound).isEqualTo(user.getId());
+    void testDefaultConstructor() {
+        Trip trip1= new Trip();
+        assertThat(trip1).isNotNull();
+
+//      ensure fields are null
+        assertThat(trip1.getUser()).isNull();
+        assertThat(trip1.getDestination()).isNull();
+        assertThat(trip1.getTripStartDate()).isNull();
+        assertThat(trip1.getTripEndDate()).isNull();
+        assertThat(trip1.getClimate()).isNull();
     }
 
     @Test
-    void testTripSetUserId() {
-        trip.setUserId(user.getId());
-        assertThat(trip.getUserId()).isEqualTo(user.getId());
+    void testTripGetUser() {
+        User userFound = trip.getUser();
+        assertThat(userFound).isEqualTo(user);
+    }
+
+    @Test
+    void testTripSetUser() {
+        User user1 = new User("Maryam", "Hay", "maryamhay@gmail.com", "Doris2Amazing");
+        trip.setUser(user1);
+        assertThat(trip.getUser()).isEqualTo(user1);
     }
 
     @Test
@@ -67,8 +81,8 @@ public class TripDTOTest {
 
     @Test
     void testUserSetTripEndDate() {
-        trip.setTripStartDate(LocalDate.of(2024, 8, 1));
-        assertThat(trip.getTripStartDate()).isEqualTo(LocalDate.of(2024, 8, 1));
+        trip.setTripEndDate(LocalDate.of(2024, 8, 1));
+        assertThat(trip.getTripEndDate()).isEqualTo(LocalDate.of(2024, 8, 1));
     }
 
     @Test
@@ -82,4 +96,8 @@ public class TripDTOTest {
         trip.setClimate(Climate.Hot);
         assertThat(trip.getClimate()).isEqualTo(Climate.Hot);
     }
+
+//    need to test getters and setter for packingList , transportationList, days
+
+
 }

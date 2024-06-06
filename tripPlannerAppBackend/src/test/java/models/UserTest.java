@@ -1,17 +1,46 @@
+package models;
+
+import com.tripPlanner.demo.models.PackingListItem;
 import com.tripPlanner.demo.models.User;
-import com.tripPlanner.demo.models.dtos.UserDTO;
+import com.tripPlanner.demo.repostitories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class UserDTOTest {
+class UserTest {
 
-    private UserDTO user;
+    private User user;
 
     @BeforeEach
     public void setUp(){
-        user =  new UserDTO("Claire", "Roy", "clairer@gmail.com", "Apples23");
+        user =  new User("Claire", "Roy", "clairer@gmail.com", "Apples23");
+    }
+
+    @Test
+    void testDefaultConstructor() {
+        User user1 = new User();
+        assertThat(user1).isNotNull();
+
+//      ensure fields are null
+        assertThat(user1.getForename()).isNull();
+        assertThat(user1.getSurname()).isNull();
+        assertThat(user1.getEmail()).isNull();
+        assertThat(user1.getPassword()).isNull();
+    }
+
+    @Test
+    void testUserGetId() {
+        user.setId(2L);
+        Long userId = user.getId();
+        assertThat(userId).isEqualTo(2L);
+    }
+
+    @Test
+    void testUserSetId() {
+        user.setId(3L);
+        assertThat(user.getId()).isEqualTo(3L);
     }
 
     @Test
@@ -62,4 +91,5 @@ public class UserDTOTest {
         user.setPassword("Pears3");
         assertThat(user.getPassword()).isEqualTo("Pears3");
     }
+
 }

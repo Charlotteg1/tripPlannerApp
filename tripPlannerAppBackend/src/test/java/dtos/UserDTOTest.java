@@ -1,18 +1,19 @@
+package dtos;
+
 import com.tripPlanner.demo.models.User;
-import com.tripPlanner.demo.repostitories.UserRepository;
+import com.tripPlanner.demo.models.dtos.UserDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class UserTest {
+public class UserDTOTest {
 
-    private User user;
+    private UserDTO user;
 
     @BeforeEach
     public void setUp(){
-        user =  new User("Claire", "Roy", "clairer@gmail.com", "Apples23");
+        user =  new UserDTO("Claire", "Roy", "clairer@gmail.com", "Apples23");
     }
 
     @Test
@@ -63,8 +64,4 @@ class UserTest {
         user.setPassword("Pears3");
         assertThat(user.getPassword()).isEqualTo("Pears3");
     }
-
-
-
-
 }
