@@ -1,4 +1,4 @@
-import { SafeAreaView, Pressable, Text, StyleSheet, Modal, View, TextInput} from "react-native";
+import { SafeAreaView, Pressable, Text, StyleSheet, Modal, View, TextInput, ScrollView} from "react-native";
 import { useState, useEffect } from "react";
 import IndividualPackingList from "./IndividualPackingList";
 import Swipeout from "react-native-swipeout";
@@ -61,7 +61,7 @@ const PackingList = ({route, navigation}) =>{
         });
         if (response.status === 201) {
             const data = await response.json();
-            // setAllLists(data)
+            setAllLists(data)
             await fetchPackingLists()
             setNewListTitle('');
         } else {
@@ -142,7 +142,7 @@ const PackingList = ({route, navigation}) =>{
     }
 
     return(
-    <SafeAreaView>
+    <SafeAreaView style={styles.packingListPage}>
         {/* go back to trip page button */}
         <Pressable style={styles.backButton} onPress={()=> navigation.goBack()}>
             <Text style={styles.backText}>
@@ -150,7 +150,7 @@ const PackingList = ({route, navigation}) =>{
             </Text>
         </Pressable>
         {/* add new list */}
-        {!allLists ? 
+        {(!allLists)? 
         (<Text style={styles.nullListText}>No packing lists to display please add packing list</Text>)
         :
         (displayEachList())
@@ -172,7 +172,7 @@ const PackingList = ({route, navigation}) =>{
                 <View style={styles.modalBackground}>
                     <View style={styles.modalContainer}>
                         <Pressable style={styles.closeButton} onPress={()=> handleCloseModal()}>
-                            <Text style={styles.closeButtonText} >Close</Text>
+                            <Text style={styles.closeButtonText} >X</Text>
                         </Pressable>
                         <TextInput
                             style={styles.inputTitle}
@@ -180,15 +180,17 @@ const PackingList = ({route, navigation}) =>{
                             value={newListTitle}
                             onChangeText={(e)=> setNewListTitle(e)}
                         />
-                        {newListTitle && (newItemsList.map((item, index) => (
-                            <TextInput
-                                key={index}
-                                style={styles.inputItem}
-                                placeholder={`Input Item (optional)`}
-                                value={item}
-                                onChangeText={(value) => handleItemChange(index, value)}
-                            />
-                        )))}
+                        <ScrollView style={styles.inputItemBox}>
+                            {newListTitle && (newItemsList.map((item, index) => (
+                                <TextInput
+                                    key={index}
+                                    style={styles.inputItem}
+                                    placeholder={`Input Item (optional)`}
+                                    value={item}
+                                    onChangeText={(value) => handleItemChange(index, value)}
+                                />
+                            )))}
+                        </ScrollView>
                         {newListTitle && <Pressable style={styles.addButton} onPress={()=>  handleAddList()}>
                             <Text style={styles.addButtonText}>Add List</Text>
                         </Pressable>}
@@ -198,20 +200,50 @@ const PackingList = ({route, navigation}) =>{
     </SafeAreaView>)
 };
 const styles = StyleSheet.create({
-    backButton: {
-
+    packingListPage:{
+        backgroundColor: '#CCD0C8',
+        height: '100%',
+        fontFamily: "Courier New",
     },
-    backText:{
-
+    backButton: {
+        marginTop: 2,
+        marginBottom: 5,
+        marginHorizontal: '2%',
+        backgroundColor: '#45A3A3',
+        paddingVertical: 4,
+        paddingHorizontal: 10,
+        borderRadius:10,
+        width: 55,
+        shadowOpacity: '0.2%',
+        shadowColor: '#775204',
+    },
+    backText: {
+        fontFamily: 'Courier New'
     },
     nullListText: {
-
+        alignSelf: "center",
+        top: '20%',
+        width: "80%",
+        textAlign: 'center',
+        fontFamily: 'Courier New',
+        fontSize: 20,
+        fontWeight: "500",
     },
     createFirstListBox: {
-
+        alignSelf: 'center',
+        top: '22%',
+        backgroundColor: '#E7CB88',
+        paddingVertical: 4,
+        paddingHorizontal: 10,
+        borderRadius:10,
+        width: 200,
+        shadowOpacity: '0.2%',
+        shadowColor: '#775204',
     },
     createFirstListText:{
-
+        fontSize: 18,
+        alignSelf: "center",
+        fontFamily: 'Courier New'
     },
     addListBox: {
 
@@ -226,33 +258,26 @@ const styles = StyleSheet.create({
         backgroundColor: '#f0f0f0',
     },
     closeButton: {
-        backgroundColor: '#A2A112',
+        alignSelf: 'flex-start',
+        backgroundColor: '#6096BA',
         paddingVertical: 3,
-        paddingHorizontal: 8, 
-        borderRadius: 5,
+        paddingHorizontal: 10, 
+        borderRadius: 16,
     },
     closeButtonText:{
-
+        fontSize: 25,
+        fontFamily: 'Courier New'
     },
-    addButton: {
-        backgroundColor: 'beige',
-        padding: 10,
-        borderRadius: 5,
-    },
-    addButtonText: {
-        color: 'navy',
-        fontWeight: '500',
-        textAlign: 'center',
-    },
+  
     modalBackground: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: 'rgba(51, 40, 11, 0.90)',
     },
     modalContainer: {
-        width: '70%',
-        height: '30%',
+        width: '75%',
+        height: '35%',
         padding: 10,
         backgroundColor: '#fff',
         borderRadius: 10,
@@ -263,11 +288,36 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
     },
+    inputItemBox: {
+        // alignItems: 'center',
+        height: '45%', 
+    },
     inputTitle:{
+        marginTop: 10,
+        fontFamily: "Courier New",
         fontWeight:"600",
+        fontSize: 28,
+        color: "#484847"
     },
     inputItem: {
-
+        marginTop: 5,
+        fontFamily: "Courier New",
+        fontWeight:"500",
+        fontSize: 18,
+        color: "#676765"
+    },  
+    addButton: {
+        backgroundColor: '#93B5DC',
+        padding: 10,
+        borderRadius: 5,
+        borderBlockColor: "#676765",
+        bottom: -50
+    },
+    addButtonText: {
+        color: '#2A8EDF',
+        fontWeight: '500',
+        textAlign: 'center',
+        fontFamily: "Courier New",
     },
     newItemInput: {
 
